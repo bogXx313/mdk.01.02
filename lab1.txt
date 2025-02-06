@@ -155,4 +155,122 @@ lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
 sync:x:5:0:sync:/sbin:/bin/sync
 shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
 
+Глава.9
+
+//Владельцы, члены группы и все остальные
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ file /etc/shadow
+/etc/shadow: regular file, no read permission
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ less /etc/shadow
+/etc/shadow: Permission denied
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ id
+uid=1000(codespace) gid=1000(codespace) groups=1000(codespace),106(ssh),107(docker),989(pipx),990(python),991(oryx),992(golang),993(sdkman),994(rvm),995(php),996(conda),997(nvs),998(nvm),999(hugo)
+
+//Чтение, запись и выполнение
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $  > foo.txt
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ ls -l foo.txt
+-rw-rw-rw- 1 codespace codespace 0 Feb  6 05:03 foo.txt
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ > foo.txt
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ ls -l foo.txt
+-rw-rw-rw- 1 codespace codespace 0 Feb  6 05:05 foo.txt
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $  chmod 600 foo.txt
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ ls -l foo.txt
+-rw------- 1 codespace codespace 0 Feb  6 05:05 foo.txt
+
+//umask — определение разрешений доступа
+к файлам по умолчанию
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ rm -f foo.txt
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ umask
+0000
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ > foo.txt
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ ls -l foo.txt
+-rw-rw-rw- 1 codespace codespace 0 Feb  6 05:22 foo.txt
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $  rm foo.txt
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ umask 0000
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ > foo.txt
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ ls -l foo.txt
+-rw-rw-rw- 1 codespace codespace 0 Feb  6 05:24 foo.txt
+
+//su — запуск командной оболочки с подстановкой
+идентификаторов пользователя и группы
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ su -
+Password: 
+su: Authentication failure
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $  su -c 'ls -l /root/*'
+Password: 
+su: Authentication failure
+
+//sudo — выполнение команды от имени
+другого пользователя
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo -l
+Matching Defaults entries for codespace on codespaces-b83637:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin,
+    secure_path=/home/codespace/.local/bin\:/usr/local/python/3.12.1/bin\:/usr/local/python/current/bin\:/usr/local/py-utils/bin\:/usr/local/oryx\:/usr/local/go/bin\:/go/bin\:/usr/local/sdkman/bin\:/usr/local/sdkman/candidates/java/current/bin\:/usr/local/sdkman/candidates/gradle/current/bin\:/usr/local/sdkman/candidates/maven/current/bin\:/usr/local/sdkman/candidates/ant/current/bin\:/usr/local/rvm/gems/default/bin\:/usr/local/rvm/gems/default@global/bin\:/usr/local/rvm/rubies/default/bin\:/usr/local/share/rbenv/bin\:/usr/local/php/current/bin\:/opt/conda/bin\:/usr/local/nvs\:/usr/local/share/nvm/current/bin\:/usr/local/hugo/bin\:/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/usr/share/dotnet\:~/.dotnet/tools\:/usr/local/py-utils/bin,
+    secure_path=/home/codespace/.dotnet\:/home/codespace/nvm/current/bin\:/home/codespace/.php/current/bin\:/home/codespace/.python/current/bin\:/home/codespace/java/current/bin\:/home/codespace/.ruby/current/bin\:/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/usr/local/bin\:/usr/local/share\:/home/codespace/.local/bin\:/home/codespace/.dotnet\:/home/codespace/nvm/current/bin\:/home/codespace/.php/current/bin\:/home/codespace/.python/current/bin\:/home/codespace/java/current/bin\:/home/codespace/.ruby/current/bin\:/home/codespace/.local/bin\:/usr/local/python/current/bin\:/usr/local/py-utils/bin\:/usr/local/oryx\:/usr/local/go/bin\:/go/bin\:/usr/local/sdkman/bin\:/usr/local/sdkman/candidates/java/current/bin\:/usr/local/sdkman/candidates/gradle/current/bin\:/usr/local/sdkman/candidates/maven/current/bin\:/usr/local/sdkman/candidates/ant/current/bin\:/usr/local/rvm/gems/default/bin\:/usr/local/rvm/gems/default@global/bin\:/usr/local/rvm/rubies/default/bin\:/usr/local/share/rbenv/bin\:/usr/local/php/current/bin\:/opt/conda/bin\:/usr/local/nvs\:/usr/local/share/nvm/current/bin\:/usr/local/hugo/bin\:/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/usr/share/dotnet\:~/.dotnet/tools
+
+User codespace may run the following commands on codespaces-b83637:
+    (root) NOPASSWD: ALL
+
+//chown — изменение владельца и группы файла
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ chown — изменение владельца и группы файла
+chown: invalid user: ‘—’
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo cp myfile.txt ~tony
+cp: cannot stat 'myfile.txt': No such file or directory
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo ls -l ~tony/myfile.txt
+ls: cannot access '~tony/myfile.txt': No such file or directory
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo chown tony: ~tony/myfile.txt
+chown: invalid spec: ‘tony:’
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo ls -l ~tony/myfile.txt
+ls: cannot access '~tony/myfile.txt': No such file or directory
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ chown — изменение владельца и группы файла
+chown: invalid user: ‘—’
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo cp myfile.txt ~tony
+cp: cannot stat 'myfile.txt': No such file or directory
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo ls -l ~tony/myfile.txt
+ls: cannot access '~tony/myfile.txt': No such file or directory
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo chown tony: ~tony/myfile.txt
+chown: invalid spec: ‘tony:’
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo ls -l ~tony/myfile.txt
+ls: cannot access '~tony/myfile.txt': No such file or directory
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ passwd
+Changing password for codespace.
+Current password: 
+passwd: Authentication token manipulation error
+passwd: password unchanged
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo mkdir /usr/local/share/Music
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ ls -ld /usr/local/share/Music
+drwxr-xr-x 2 root root 4096 Feb  6 05:55 /usr/local/share/Music
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo chown :music /usr/local/share/Music
+chown: invalid group: ‘:music’
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo chmod 775 /usr/local/share/Music
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ ls -ld /usr/local/share/Music
+drwxrwxr-x 2 root root 4096 Feb  6 05:55 /usr/local/share/Music
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $  /usr/local/share/Music/test_file 
+bash: /usr/local/share/Music/test_file: No such file or directory
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ ls -l /usr/local/share/Music
+total 0
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ sudo chmod g+s /usr/local/share/Music
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ ls -ld /usr/local/share/Music
+drwxrwsr-x 2 root root 4096 Feb  6 05:55 /usr/local/share/Music
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ umask 0002
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ rm /usr/local/share/Music/test_file
+rm: cannot remove '/usr/local/share/Music/test_file': No such file or directory
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $  > /usr/local/share/Music/test_file
+bash: /usr/local/share/Music/test_file: Permission denied
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ mkdir /usr/local/share/Music/test_dir
+mkdir: cannot create directory ‘/usr/local/share/Music/test_dir’: Permission denied
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ ls -l /usr/local/share/Music
+total 0
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $  passwd
+Changing password for codespace.
+Current password: 
+passwd: Authentication token manipulation error
+passwd: password unchanged.
+
+
+
+
+
+
+
+
 
