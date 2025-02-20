@@ -1,0 +1,330 @@
+Building configuration...
+
+Current configuration : 1340 bytes
+!
+version 15.0
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Switch
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ switchport access vlan 2
+!
+interface FastEthernet0/2
+ switchport access vlan 2
+!
+interface FastEthernet0/3
+ switchport access vlan 3
+!
+interface FastEthernet0/4
+ switchport access vlan 3
+!
+interface FastEthernet0/5
+ switchport access vlan 4
+!
+interface FastEthernet0/6
+ switchport access vlan 4
+!
+interface FastEthernet0/7
+ switchport access vlan 5
+!
+interface FastEthernet0/8
+ switchport access vlan 5
+!
+interface FastEthernet0/9
+ switchport access vlan 6
+!
+interface FastEthernet0/10
+ switchport access vlan 6
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+!
+!
+!
+line con 0
+!
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+!
+!
+!
+end
+
+Building configuration...
+
+Current configuration : 1162 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2911/K9 sn FTX15246MJF-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0.2
+ encapsulation dot1Q 2
+ ip address 192.168.2.254 255.255.255.0
+!
+interface GigabitEthernet0/0.3
+ encapsulation dot1Q 3
+ ip address 192.168.3.254 255.255.255.0
+!
+interface GigabitEthernet0/0.4
+ encapsulation dot1Q 4
+ ip address 192.168.4.254 255.255.255.0
+!
+interface GigabitEthernet0/0.5
+ encapsulation dot1Q 5
+ ip address 192.168.5.254 255.255.255.0
+!
+interface GigabitEthernet0/0.6
+ encapsulation dot1Q 6
+ ip address 192.168.6.254 255.255.255.0
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router rip
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
+Building configuration...
+
+Current configuration : 1401 bytes
+!
+version 15.0
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Switch
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ switchport access vlan 2
+!
+interface FastEthernet0/2
+ switchport access vlan 2
+!
+interface FastEthernet0/3
+ switchport access vlan 3
+!
+interface FastEthernet0/4
+ switchport access vlan 3
+!
+interface FastEthernet0/5
+ switchport access vlan 4
+!
+interface FastEthernet0/6
+ switchport access vlan 4
+!
+interface FastEthernet0/7
+ switchport access vlan 5
+!
+interface FastEthernet0/8
+ switchport access vlan 5
+!
+interface FastEthernet0/9
+ switchport access vlan 6
+!
+interface FastEthernet0/10
+ switchport access vlan 6
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+ switchport trunk allowed vlan 2-1001
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+!
+!
+!
+line con 0
+!
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+!
+!
+!
+end
+Building configuration...
+
+Current configuration : 1674 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip dhcp pool Dir1
+ network 192.168.2.0 255.255.255.0
+ default-router 192.168.2.254
+ dns-server 8.8.8.8
+ip dhcp pool Dir2
+ network 192.168.3.0 255.255.255.0
+ default-router 192.168.3.254
+ dns-server 8.8.8.8
