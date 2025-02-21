@@ -1,0 +1,87 @@
+Настройка без сервера (pool)
+
+ip dhcp pool vlan2
+ network 192.168.104.0 255.255.255.192
+ default-router 192.168.104.126
+ dns-server 8.8.8.8
+ip dhcp pool vlan3
+ network 192.168.104.0 255.255.255.224
+ default-router 192.168.104.158
+ dns-server 8.8.8.8
+ip dhcp pool vlan4
+ network 192.168.104.0 255.255.255.240
+ default-router 192.168.104.174
+ dns-server 8.8.8.8
+ip dhcp pool vlan5
+ network 192.168.104.160 255.255.255.240
+ dns-server 8.8.8.8
+ip dhcp pool vlan1
+ network 192.168.104.0 255.255.255.192
+ default-router 192.168.104.62
+
+
+switc
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ switchport access vlan 2
+!
+interface FastEthernet0/2
+ switchport access vlan 2
+!
+interface FastEthernet0/3
+ switchport access vlan 3
+!
+interface FastEthernet0/4
+ switchport access vlan 3
+!
+interface FastEthernet0/5
+ switchport access vlan 4
+!
+interface FastEthernet0/6
+ switchport access vlan 4
+!
+interface FastEthernet0/7
+ switchport access vlan 104
+!
+interface FastEthernet0/8
+ switchport access vlan 104
+!
+interface FastEthernet0/9
+ switchport mode trunk
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+ switchport access vlan 2
+ switchport trunk allowed vlan 2-1001
+ switchport mode trunk
