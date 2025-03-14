@@ -1,0 +1,152 @@
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker search ubuntu  
+NAME                             DESCRIPTION                                     STARS     OFFICIAL
+ubuntu                           Ubuntu is a Debian-based Linux operating sys…   17496     [OK]
+ubuntu/squid                     Squid is a caching proxy for the Web. Long-t…   107       
+ubuntu/nginx                     Nginx, a high-performance reverse proxy & we…   127       
+ubuntu/cortex                    Cortex provides storage for Prometheus. Long…   4         
+ubuntu/kafka                     Apache Kafka, a distributed event streaming …   53        
+ubuntu/prometheus                Prometheus is a systems and service monitori…   70        
+ubuntu/apache2                   Apache, a secure & extensible open-source HT…   90        
+ubuntu/bind9                     BIND 9 is a very flexible, full-featured DNS…   102       
+ubuntu/zookeeper                 ZooKeeper maintains configuration informatio…   13        
+ubuntu/mysql                     MySQL open source fast, stable, multi-thread…   67        
+ubuntu/redis                     Redis, an open source key-value store. Long-…   23        
+ubuntu/postgres                  PostgreSQL is an open source object-relation…   41        
+ubuntu/jre                       Distroless Java runtime based on Ubuntu. Lon…   19        
+ubuntu/dotnet-aspnet             Chiselled Ubuntu runtime image for ASP.NET a…   25        
+ubuntu/cassandra                 Cassandra, an open source NoSQL distributed …   2         
+ubuntu/memcached                 Memcached, in-memory keyvalue store for smal…   5         
+ubuntu/grafana                   Grafana, a feature rich metrics dashboard & …   12        
+ubuntu/python                    A chiselled Ubuntu rock with the Python runt…   20        
+ubuntu/dotnet-runtime            Chiselled Ubuntu runtime image for .NET apps…   20        
+ubuntu/prometheus-alertmanager   Alertmanager handles client alerts from Prom…   9         
+ubuntu/dotnet-deps               Chiselled Ubuntu for self-contained .NET & A…   16        
+ubuntu/telegraf                  Telegraf collects, processes, aggregates & w…   4         
+ubuntu/mlflow                    MLFlow: for managing the machine learning li…   5         
+ubuntu/loki                      Grafana Loki, a log aggregation system like …   2         
+ubuntu/chiselled-jre             [MOVED TO ubuntu/jre] Chiselled JRE: distrol…   3         
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker pull ubuntu:18.04
+18.04: Pulling from library/ubuntu
+7c457f213c76: Pull complete 
+Digest: sha256:152dc042452c496007f07ca9127571cb9c29697f42acbfad72324b2bb2e43c98
+Status: Downloaded newer image for ubuntu:18.04
+docker.io/library/ubuntu:18.04
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker pull docker pull nginx:stable-perl
+"docker pull" requires exactly 1 argument.
+See 'docker pull --help'.
+
+Usage:  docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+
+Download an image from a registry
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $  docker pull nginx:stable-perl
+stable-perl: Pulling from library/nginx
+7cf63256a31a: Pull complete 
+6b88dd42351a: Pull complete 
+513c3649bb14: Pull complete 
+6ba1ee9d2488: Pull complete 
+6f10380a6f3b: Pull complete 
+66d2b806bea6: Pull complete 
+09f0cd9e88a7: Pull complete 
+55457340f1ae: Pull complete 
+Digest: sha256:c2950a70e773cc9c7135930354dc8fe1b4a25ceeaa70b8ccb2e469ca31a8d0a7
+Status: Downloaded newer image for nginx:stable-perl
+docker.io/library/nginx:stable-perl
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker pull oraclelinux:8.10
+8.10: Pulling from library/oraclelinux
+e3976b871425: Pull complete 
+Digest: sha256:d9517e138b6fbd7ff7abe2eb6a5eaf87bc83695af6cb98cb60b36a260d607c05
+Status: Downloaded newer image for oraclelinux:8.10
+docker.io/library/oraclelinux:8.10
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker pull mariadb:11.8.1-ubi9-rc
+11.8.1-ubi9-rc: Pulling from library/mariadb
+533b69cfd644: Pull complete 
+863e9a7e2102: Pull complete 
+3a86afe37749: Pull complete 
+0ae80129171f: Pull complete 
+97d98622ce57: Pull complete 
+fca825d5550b: Pull complete 
+e47b75af6b4d: Pull complete 
+05d1e27cbc21: Pull complete 
+3cadc7b9abac: Pull complete 
+47caa1f80f36: Pull complete 
+Digest: sha256:21e503013a5a1ca22b25b6d20b6fb78477d0d529fdf323115fc421345c63ce1c
+Status: Downloaded newer image for mariadb:11.8.1-ubi9-rc
+docker.io/library/mariadb:11.8.1-ubi9-rc
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker pull joomla:php8.3-fpm-alpine
+php8.3-fpm-alpine: Pulling from library/joomla
+f18232174bc9: Pull complete 
+40e8704a9e04: Pull complete 
+d623c6b5e39a: Pull complete 
+56c4090982c8: Pull complete 
+74925b6bce74: Pull complete 
+bac957267efe: Pull complete 
+84047faae525: Pull complete 
+8e8841f52206: Pull complete 
+6ac187769239: Pull complete 
+4f4fb700ef54: Pull complete 
+8bf9f721c4ff: Pull complete 
+32d7a87a345a: Pull complete 
+1cec798f1a59: Pull complete 
+460dce42f58d: Pull complete 
+9c8b77a9996f: Pull complete 
+a9f593bdb001: Pull complete 
+cf548dfbc62b: Pull complete 
+829de9627317: Pull complete 
+Digest: sha256:e973e994cd513ebc6833cf9eb775587b9ffb47bcaaf386259554971a1fa88fcd
+Status: Downloaded newer image for joomla:php8.3-fpm-alpine
+docker.io/library/joomla:php8.3-fpm-alpine
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker images -a
+REPOSITORY    TAG                 IMAGE ID       CREATED         SIZE
+oraclelinux   8.10                0462580edc87   12 hours ago    251MB
+joomla        php8.3-fpm-alpine   6e523a25c227   3 days ago      276MB
+mariadb       11.8.1-ubi9-rc      f1ba504522c6   3 weeks ago     467MB
+nginx         stable-perl         4d63c549afba   5 weeks ago     240MB
+ubuntu        18.04               f9a80a55f492   21 months ago   63.2MB
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker rmi f1ba504522c6
+Untagged: mariadb:11.8.1-ubi9-rc
+Untagged: mariadb@sha256:21e503013a5a1ca22b25b6d20b6fb78477d0d529fdf323115fc421345c63ce1c
+Deleted: sha256:f1ba504522c62b539c4f9e3f6a5f1e1fc8630a24c64de5fbdd96b53a5fc62216
+Deleted: sha256:c0b88cc36a05dc787a89fda237a77269338350c0a317809a93f57930b076fdce
+Deleted: sha256:304bf92d38847c135f16e445e3c9d1166f4d737d6e7db55317ae0727a1bcc9f6
+Deleted: sha256:4e0e8c531a1a2f2a5c86313065a1f1fc88c919a2b803f52b52c0a6965eb4e383
+Deleted: sha256:ac5dffc39078344544b2d78d00f2490dce4235a6cf23848d4ea88cb664d40a3d
+Deleted: sha256:0af9bfbdcd537e82970f30e66305c9a22ab8edd13da14b517b8ba36b203fc88a
+Deleted: sha256:c1e0034e92df11cc99f6220d9c6300f9470e48b00e312e785754269830771904
+Deleted: sha256:e49c2427b7371b2d21d62c64926113d4debabc9082145ed17908956ab0b5f154
+Deleted: sha256:0a1a7f79fafbbf7003c35c7003f839a49b2b08971a88625fbda4f2896d3dd433
+Deleted: sha256:21262466cf1f4741d4824352dd10076179f3a0a6b568810c5c79c02f68728feb
+Deleted: sha256:45c00d6e135e1efede5f576d5aff6e014fc6bde10cacbf029f997e813b065984
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker rmi -f 0462580edc87
+Untagged: oraclelinux:8.10
+Untagged: oraclelinux@sha256:d9517e138b6fbd7ff7abe2eb6a5eaf87bc83695af6cb98cb60b36a260d607c05
+Deleted: sha256:0462580edc87ac7647385a94dbfe7f073ef2e55dd85008254f64459f18efab8a
+Deleted: sha256:a48c30d37e643db6e55366216e301149530fd5b9cf751fa59e374c5891f3d915
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker images -a
+REPOSITORY   TAG                 IMAGE ID       CREATED         SIZE
+joomla       php8.3-fpm-alpine   6e523a25c227   3 days ago      276MB
+nginx        stable-perl         4d63c549afba   5 weeks ago     240MB
+ubuntu       18.04               f9a80a55f492   21 months ago   63.2MB
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker run 6e523a25c227
+========================================================================
+
+[ERROR] Missing JOOMLA_DB_HOST and MYSQL_PORT_3306_TCP environment variables.
+ Did you forget to --link some_mysql_container:mysql or set an external db
+ with -e JOOMLA_DB_HOST=hostname:port?
+
+========================================================================
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker run -d 6e523a25c227
+15320ff8391def145e61250cc4cb2489b40de5d23f0b23bf25b625125db9f1e8
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker run -it ubuntu:18.04
+root@00df0c73ad52:/# pwd
+/
+root@00df0c73ad52:/# uname -a
+Linux 00df0c73ad52 6.8.0-1021-azure #18.04.1-Ubuntu SMP Thu Jan 16 21:37:09 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+root@00df0c73ad52:/# date
+Fri Mar 14 05:54:30 UTC 2025
+root@00df0c73ad52:/# exit
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS                      PORTS     NAMES
+00df0c73ad52   ubuntu:18.04   "/bin/bash"              2 minutes ago   Exited (0) 13 seconds ago             clever_carson
+15320ff8391d   6e523a25c227   "/entrypoint.sh php-…"   2 minutes ago   Exited (1) 2 minutes ago              cranky_brown
+c08635cad9e6   6e523a25c227   "/entrypoint.sh php-…"   3 minutes ago   Exited (1) 3 minutes ago              pensive_joliot
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ 
