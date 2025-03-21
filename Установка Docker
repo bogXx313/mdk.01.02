@@ -3,4 +3,5 @@ sudo apt install curl software-properties-common ca-certificates apt-transport-h
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable"
 Установка Docker Compose 
-установил
+u09@u09-VirtualBox:~$ docker compose version
+Docker Compose version v2.34.0
