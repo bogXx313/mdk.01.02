@@ -1,1 +1,120 @@
 //openjdk
+u09@u09-VirtualBox:~$ docker pull openjdk
+Using default tag: latest
+latest: Pulling from library/openjdk
+197c1adcd755: Pull complete 
+57b698b7af4b: Pull complete 
+95a27dbe0150: Pull complete 
+Digest: sha256:9b448de897d211c9e0ec635a485650aed6e28d4eca1efbc34940560a480b3f1f
+Status: Downloaded newer image for openjdk:latest
+docker.io/library/openjdk:latest
+//mysql
+u09@u09-VirtualBox:~$ docker pull mysql
+Using default tag: latest
+latest: Pulling from library/mysql
+804bb8ae89de: Pull complete 
+1b515e7ceb69: Pull complete 
+eaa11c0a9f08: Pull complete 
+8d18181893b8: Pull complete 
+e0a910cc8604: Pull complete 
+bc0c792ca096: Pull complete 
+8d73d2a73425: Pull complete 
+4a7e00d873b9: Pull complete 
+27a2553d6a80: Pull complete 
+69e76254f502: Pull complete 
+Digest: sha256:9b9d0aab4860798acff13d2a0ece3bc26639fe18b83fa5cd3e3d0e16b3ed05dd
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest
+//mariadb
+u09@u09-VirtualBox:~$ docker pull mariadb
+Using default tag: latest
+latest: Pulling from library/mariadb
+5a7813e071bf: Pull complete 
+bdecd990c29c: Pull complete 
+5db80086e4da: Pull complete 
+901fe9394c00: Pull complete 
+43eb19e1b102: Pull complete 
+597f7afe50fe: Pull complete 
+e1dede558384: Pull complete 
+5c3a22df929b: Pull complete 
+Digest: sha256:310d29fbb58169dcddb384b0ff138edb081e2773d6e2eceb976b3668089f2f84
+Status: Downloaded newer image for mariadb:latest
+docker.io/library/mariadb:latest
+//postgres/
+u09@u09-VirtualBox:~$ docker pull postgres
+Using default tag: latest
+latest: Pulling from library/postgres
+6e909acdb790: Pull complete 
+fec99121872b: Pull complete 
+133acbc970df: Pull complete 
+e02d97322fc6: Pull complete 
+db9643c6baf3: Pull complete 
+9bcedd9434e7: Pull complete 
+fc8982ec96d9: Pull complete 
+1824bd6b75d7: Pull complete 
+fbad2bf2d5e6: Pull complete 
+221788d72606: Pull complete 
+e5f43b682bc0: Pull complete 
+e7a2d9e24ab0: Pull complete 
+a96cb29b0d13: Pull complete 
+140970538145: Pull complete 
+Digest: sha256:7f29c02ba9eeff4de9a9f414d803faa0e6fe5e8d15ebe217e3e418c82e652b35
+Status: Downloaded newer image for postgres:latest
+docker.io/library/postgres:latest
+//php
+u09@u09-VirtualBox:~$ docker pull php
+Using default tag: latest
+latest: Pulling from library/php
+6e909acdb790: Already exists 
+a843a84fd431: Pull complete 
+46f6a7fc8e67: Pull complete 
+d0177042fc93: Pull complete 
+46390c1686de: Pull complete 
+4764feada775: Pull complete 
+d46a93356f6d: Pull complete 
+148cff309ee1: Pull complete 
+39784e77cb58: Pull complete 
+Digest: sha256:f9410ffdc12c9ab0b6c390a56e46a13ef58558f7c2abda1bc1bb3291a7d57452
+Status: Downloaded newer image for php:latest
+docker.io/library/php:latest
+//phpmyadmin
+u09@u09-VirtualBox:~$ docker pull phpmyadmin
+Using default tag: latest
+latest: Pulling from library/phpmyadmin
+6e909acdb790: Already exists 
+5db2c4b6137b: Pull complete 
+dacb60b59038: Pull complete 
+64450047668b: Pull complete 
+4d6386e035f7: Pull complete 
+e4ca7ebe0914: Pull complete 
+3dc5d9089396: Pull complete 
+1778f52baa09: Pull complete 
+a5d9cb1c80ec: Pull complete 
+b116c8459f57: Pull complete 
+8f8ddda3587a: Pull complete 
+f432ea27fc70: Pull complete 
+6a5a37a900f3: Pull complete 
+4f4fb700ef54: Pull complete 
+2356864ac4b9: Pull complete 
+28fa232eddfc: Pull complete 
+a084403b2fe2: Pull complete 
+69286ddc9ea5: Pull complete 
+21d6bc6af9fd: Pull complete 
+5fb8db322bbb: Pull complete 
+Digest: sha256:6cb0a7146734b59c8ca4f450ce7bde9f518e36b10558af75fc36591cbea1d5cc
+Status: Downloaded newer image for phpmyadmin:latest
+docker.io/library/phpmyadmin:latest
+//httpd
+u09@u09-VirtualBox:~$ docker pull httpd
+Using default tag: latest
+latest: Pulling from library/httpd
+6e909acdb790: Already exists 
+9f9b03a66afb: Pull complete 
+4f4fb700ef54: Pull complete 
+09bf08b13dbd: Pull complete 
+084c58879b9a: Pull complete 
+c61868f0ad74: Pull complete 
+Digest: sha256:391a8eb0c1ed464163da46099606a5ec293705118f3054d6c60f5957e2485bd0
+Status: Downloaded newer image for httpd:latest
+docker.io/library/httpd:latest
+//
