@@ -1,0 +1,102 @@
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker volume create vol1
+vol1
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker volume create vol2
+vol2
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker volume ls
+DRIVER    VOLUME NAME
+local     vol1
+local     vol2
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker ps -a
+CONTAINER ID   IMAGE          COMMAND       CREATED      STATUS                  PORTS     NAMES
+6f55e80155d2   9452be48b375   "/bin/bash"   7 days ago   Exited (0) 7 days ago             reverent_einstein
+7ffe1d8c4156   a04dc4851cbc   "/bin/bash"   8 days ago   Exited (0) 7 days ago             pensive_davinci
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+ubuntu       22.04m3   63b88e520ec5   7 days ago     330MB
+postgres     latest    76e3e031d245   4 weeks ago    438MB
+ubuntu       24.04     a04dc4851cbc   2 months ago   78.1MB
+mysql        latest    fa262c3a6564   2 months ago   797MB
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker run --mount type=volume,source=vol1,target=/home/vol1 --name myub -it ubuntu:22.04
+Unable to find image 'ubuntu:22.04' locally
+22.04: Pulling from library/ubuntu
+9cb31e2e37ea: Pull complete 
+Digest: sha256:ed1544e454989078f5dec1bfdabd8c5cc9c48e0705d07b678ab6ae3fb61952d2
+Status: Downloaded newer image for ubuntu:22.04
+root@792c75523642:/#  cd /home/vol1
+root@792c75523642:/home/vol1# ls -l
+total 0
+root@792c75523642:/home/vol1# ls -1
+root@792c75523642:/home/vol1# cat > test_vol.txt
+проверкафункций тома vol1
+1224436              
+root@792c75523642:/home/vol1# exit
+exit
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker volume inspect vol1
+[
+    {
+        "CreatedAt": "2025-03-28T06:00:01Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/vol1/_data",
+        "Name": "vol1",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker run --mount type=volume,source=vol1,target=/home/vol1 --mount type=volume,source=vol2,target=/home/vol2 --name myub1 -it --rm ubuntu:22.04
+root@602451c8d3b3:/#  cd /home/vol1
+root@602451c8d3b3:/home/vol1# ls-l
+bash: ls-l: command not found
+root@602451c8d3b3:/home/vol1# ls-1
+bash: ls-1: command not found
+root@602451c8d3b3:/home/vol1# ls -l
+total 4
+-rw-r--r-- 1 root root 61 Mar 28 06:23 test_vol.txt
+root@602451c8d3b3:/home/vol1# cat > test_vol2_myub1.txt
+усердно пишим и проверям работу с vol1 из этого лучшего контейнера myub1^C
+root@602451c8d3b3:/home/vol1# cd ../vol2               
+root@602451c8d3b3:/home/vol2# ls -l
+total 0
+root@602451c8d3b3:/home/vol2# cp ../vol1/* ./
+root@602451c8d3b3:/home/vol2# ls -l
+total 4
+-rw-r--r-- 1 root root 61 Mar 28 06:54 test_vol.txt
+-rw-r--r-- 1 root root  0 Mar 28 06:54 test_vol2_myub1.txt
+root@602451c8d3b3:/home/vol2# exit
+exit
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker ps -a
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS                        PORTS     NAMES
+792c75523642   ubuntu:22.04   "/bin/bash"   39 minutes ago   Exited (130) 32 minutes ago             myub
+6f55e80155d2   9452be48b375   "/bin/bash"   8 days ago       Exited (0) 8 days ago                   reverent_einstein
+7ffe1d8c4156   a04dc4851cbc   "/bin/bash"   8 days ago       Exited (0) 8 days ago                   pensive_davinci
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ mkdir vol3
+@bogXx313 ➜ /workspaces/mdk.01.02 (main) $ cd vol3
+@bogXx313 ➜ /workspaces/mdk.01.02/vol3 (main) $ cat >massage_to_container
+Holla от хостовой системы контейнеру 
+235089280990@bogXx313 ➜ /workspaces/mdk.01.02/vol3 (main) $ 
+@bogXx313 ➜ /workspaces/mdk.01.02/vol3 (main) $ docker run --mount type=bind,source=.,target=/home/vol3 --mount type=volume,source=vol2,target=/home/vol2 --name myub1 -it --rm ubuntu:22.04
+root@ede4da4d2284:/# cd /home /vol3
+bash: cd: too many arguments
+root@ede4da4d2284:/# cd /home/vol3
+root@ede4da4d2284:/home/vol3# ls -l
+total 4
+-rw-rw-rw- 1 1000 1000 77 Mar 28 07:01 massage_to_container
+root@ede4da4d2284:/home/vol3# cat message_to_container
+cat: message_to_container: No such file or directory
+root@ede4da4d2284:/home/vol3# cat massage_to_container
+Holla от хостовой системы контейнеру 
+235089280990root@ede4da4d2284:/home/vol3# cd ..
+root@ede4da4d2284:/home# cd vol2
+root@ede4da4d2284:/home/vol2# ls -l
+total 4
+-rw-r--r-- 1 root root 61 Mar 28 06:54 test_vol.txt
+-rw-r--r-- 1 root root  0 Mar 28 06:54 test_vol2_myub1.txt
+root@ede4da4d2284:/home/vol2# cd ..
+root@ede4da4d2284:/home# ls -1
+vol2
+vol3
+root@ede4da4d2284:/home# exit
+exit
+@bogXx313 ➜ /workspaces/mdk.01.02/vol3 (main) $ 
