@@ -117,4 +117,151 @@ c61868f0ad74: Pull complete
 Digest: sha256:391a8eb0c1ed464163da46099606a5ec293705118f3054d6c60f5957e2485bd0
 Status: Downloaded newer image for httpd:latest
 docker.io/library/httpd:latest
-//
+//nginx
+u09@u09-VirtualBox:~$ docker pull nginx
+Using default tag: latest
+latest: Pulling from library/nginx
+6e909acdb790: Already exists 
+5eaa34f5b9c2: Pull complete 
+417c4bccf534: Pull complete 
+e7e0ca015e55: Pull complete 
+373fe654e984: Pull complete 
+97f5c0f51d43: Pull complete 
+c22eb46e871a: Pull complete 
+Digest: sha256:124b44bfc9ccd1f3cedf4b592d4d1e8bddb78b51ec2ed5056c52d3692baebc19
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
+//alpine
+u09@u09-VirtualBox:~$ docker pull alpine
+Using default tag: latest
+latest: Pulling from library/alpine
+f18232174bc9: Pull complete 
+Digest: sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c
+Status: Downloaded newer image for alpine:latest
+docker.io/library/alpine:latest
+//redis
+u09@u09-VirtualBox:~$ docker pull redis
+Using default tag: latest
+latest: Pulling from library/redis
+6e909acdb790: Already exists 
+d9b98f603d6b: Pull complete 
+513666b05c81: Pull complete 
+764e7fbfdb05: Pull complete 
+2884ccae34c1: Pull complete 
+df4660a56a60: Pull complete 
+4f4fb700ef54: Pull complete 
+b138a3179b82: Pull complete 
+Digest: sha256:bd41d55aae1ecff61b2fafd0d66761223fe94a60373eb6bb781cfbb570a84079
+Status: Downloaded newer image for redis:latest
+docker.io/library/redis:latest
+//python
+u09@u09-VirtualBox:~$ docker pull python
+Using default tag: latest
+latest: Pulling from library/python
+7cd785773db4: Pull complete 
+091eb8249475: Pull complete 
+255774e0027b: Pull complete 
+353e14e5cc47: Pull complete 
+70847531e23d: Pull complete 
+af0b544b1a82: Pull complete 
+379f06e37dbb: Pull complete 
+Digest: sha256:8c55c44b9e81d537f8404d0000b7331863d134db87c1385dd0ec7fefff656495
+Status: Downloaded newer image for python:latest
+docker.io/library/python:latest
+//wordpress
+u09@u09-VirtualBox:~$ docker pull wordpress
+Using default tag: latest
+latest: Pulling from library/wordpress
+6e909acdb790: Already exists 
+5db2c4b6137b: Already exists 
+dacb60b59038: Already exists 
+64450047668b: Already exists 
+4d6386e035f7: Already exists 
+e4ca7ebe0914: Already exists 
+3dc5d9089396: Already exists 
+1778f52baa09: Already exists 
+a5d9cb1c80ec: Already exists 
+b116c8459f57: Already exists 
+8f8ddda3587a: Already exists 
+f432ea27fc70: Already exists 
+6a5a37a900f3: Already exists 
+4f4fb700ef54: Already exists 
+57c6ea19af98: Pull complete 
+ae777a0ca433: Pull complete 
+5f19650adea9: Pull complete 
+177323f85a94: Pull complete 
+fe638a1d1db7: Pull complete 
+f4abcace8187: Pull complete 
+729bf49a9314: Pull complete 
+cac8b814902b: Pull complete 
+Digest: sha256:8b0ffd461bfaf8e74ab98481f45d1b2596986767faf2dc65bb47c875076f8a14
+Status: Downloaded newer image for wordpress:latest
+docker.io/library/wordpress:latest
+//tomcat
+u09@u09-VirtualBox:~$ docker pull tomcat
+Using default tag: latest
+latest: Pulling from library/tomcat
+5a7813e071bf: Already exists 
+8dbbbc6af9dc: Pull complete 
+a10b6847b9f1: Pull complete 
+dcc1c5ea3c7d: Pull complete 
+91e6cc55403a: Pull complete 
+5d4660d0a9e9: Pull complete 
+4f4fb700ef54: Pull complete 
+e231914ca483: Pull complete 
+Digest: sha256:1374a565d5122fdb42807f3a5f2d4fcc245a5e15420ff5bb5123afedc8ef769d
+Status: Downloaded newer image for tomcat:latest
+docker.io/library/tomcat:latest
+//adminer
+u09@u09-VirtualBox:~$ docker pull adminer
+Using default tag: latest
+latest: Pulling from library/adminer
+f18232174bc9: Already exists 
+bf6feb845014: Pull complete 
+7bbf97ddef06: Pull complete 
+f2062318e97b: Pull complete 
+af6ac0368878: Pull complete 
+b708412c0939: Pull complete 
+abb8b8b95fbd: Pull complete 
+ee465e8b79c2: Pull complete 
+ac1960b6bc03: Pull complete 
+32b557a955e4: Pull complete 
+ca578bb4bd17: Pull complete 
+4f4fb700ef54: Pull complete 
+fedb644ca261: Pull complete 
+b43610f15a81: Pull complete 
+29f1acfdd788: Pull complete 
+e6d203edd5ad: Pull complete 
+Digest: sha256:83f7567b24a7bfaadb2d780601e48aeab8ff6b29700792b07aa343b89056da35
+Status: Downloaded newer image for adminer:latest
+docker.io/library/adminer:latest
+//Joomla
+u09@u09-VirtualBox:~$ docker pull joomla
+Using default tag: latest
+latest: Pulling from library/joomla
+6e909acdb790: Already exists 
+9439b75f7025: Pull complete 
+480b11587afc: Pull complete 
+21ac9628630d: Pull complete 
+83e70aea67e7: Pull complete 
+e1a7f56a8819: Pull complete 
+108ebd4ec1f6: Pull complete 
+a022dc65d674: Pull complete 
+fb1cccd7bd4c: Pull complete 
+9a3a4deb9512: Pull complete 
+2c68f3c3dfb5: Pull complete 
+f4ed2fe59b45: Pull complete 
+6451280804a1: Pull complete 
+4f4fb700ef54: Pull complete 
+ff83add17dab: Pull complete 
+619ccf030404: Pull complete 
+7d8c442e04a8: Pull complete 
+eb65bf13737d: Pull complete 
+becef2fd8a26: Pull complete 
+02e94d850989: Pull complete 
+e05630d73eff: Pull complete 
+351d921b8e20: Pull complete 
+Digest: sha256:f8ef95ae126a8123bd3b8c12e2c2a4d5e547b1dfd6a52cb2c09b9f13dd2e3a6b
+Status: Downloaded newer image for joomla:latest
+docker.io/library/joomla:latest
+
