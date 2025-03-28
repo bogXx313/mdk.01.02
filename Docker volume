@@ -1,3 +1,5 @@
+//Volume
+
 @bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker volume create vol1
 vol1
 @bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker volume create vol2
@@ -18,6 +20,7 @@ ubuntu       22.04m3   63b88e520ec5   7 days ago     330MB
 postgres     latest    76e3e031d245   4 weeks ago    438MB
 ubuntu       24.04     a04dc4851cbc   2 months ago   78.1MB
 mysql        latest    fa262c3a6564   2 months ago   797MB
+//vol1
 @bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker run --mount type=volume,source=vol1,target=/home/vol1 --name myub -it ubuntu:22.04
 Unable to find image 'ubuntu:22.04' locally
 22.04: Pulling from library/ubuntu
@@ -45,6 +48,7 @@ exit
         "Scope": "local"
     }
 ]
+//vol2
 @bogXx313 ➜ /workspaces/mdk.01.02 (main) $ docker run --mount type=volume,source=vol1,target=/home/vol1 --mount type=volume,source=vol2,target=/home/vol2 --name myub1 -it --rm ubuntu:22.04
 root@602451c8d3b3:/#  cd /home/vol1
 root@602451c8d3b3:/home/vol1# ls-l
