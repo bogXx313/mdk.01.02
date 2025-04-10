@@ -1,0 +1,220 @@
+//1
+u09@u09-VirtualBox:~$ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+03f42ab4edb3   bridge    bridge    local
+f68c36391e91   host      host      local
+57bdca3304d2   none      null      local
+u09@u09-VirtualBox:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:c3:7c:17 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic noprefixroute enp0s3
+       valid_lft 86241sec preferred_lft 86241sec
+    inet6 fe80::a7c6:57fa:f607:b955/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:84:ed:3a brd ff:ff:ff:ff:ff:ff
+    inet 192.168.9.1/24 brd 192.168.9.255 scope global noprefixroute enp0s8
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5d12:6336:30fb:fd60/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+4: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether f2:0f:73:5e:be:a4 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+u09@u09-VirtualBox:~$ cat /etc/resolv.conf
+# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
+# Do not edit.
+#
+# This file might be symlinked as /etc/resolv.conf. If you're looking at
+# /etc/resolv.conf and seeing this text, you have followed the symlink.
+#
+# This is a dynamic resolv.conf file for connecting local clients to the
+# internal DNS stub resolver of systemd-resolved. This file lists all
+# configured search domains.
+#
+# Run "resolvectl status" to see details about the uplink DNS servers
+# currently in use.
+#
+# Third party programs should typically not access this file directly, but only
+# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a
+# different way, replace this symlink by a static file or a different symlink.
+#
+# See man:systemd-resolved.service(8) for details about the supported modes of
+# operation for /etc/resolv.conf.
+
+nameserver 127.0.0.53
+options edns0 trust-ad
+search nkti.local
+u09@u09-VirtualBox:~$ cat /etc/hosts
+127.0.0.1	localhost
+127.0.1.1	u09-VirtualBox
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+u09@u09-VirtualBox:~$ docker network create -d bridge my_bridge
+9cdd91d45f19b9c542abe337117c4c838e809240c5b18216e1b66264466b0227
+u09@u09-VirtualBox:~$ docker network ls
+NETWORK ID     NAME        DRIVER    SCOPE
+03f42ab4edb3   bridge      bridge    local
+f68c36391e91   host        host      local
+9cdd91d45f19   my_bridge   bridge    local
+57bdca3304d2   none        null      local
+u09@u09-VirtualBox:~$ docker network inspect my_bridge
+[
+    {
+        "Name": "my_bridge",
+        "Id": "9cdd91d45f19b9c542abe337117c4c838e809240c5b18216e1b66264466b0227",
+        "Created": "2025-04-10T13:15:20.342045051+07:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+09@u09-VirtualBox:~$ docker run -itd --net my_bridge --name cont1 --rm alpine
+2fe0ab7e2fe6310e2a3e835c40ef1fa84dded8d76de8dc9cc6e3911dd5b81c5d
+u09@u09-VirtualBox:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND     CREATED              STATUS              PORTS     NAMES
+2fe0ab7e2fe6   alpine    "/bin/sh"   About a minute ago   Up About a minute             cont1
+u09@u09-VirtualBox:~$ docker exec cont1 ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0@if6: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP 
+    link/ether b2:af:e4:f2:9f:b8 brd ff:ff:ff:ff:ff:ff
+    inet 172.18.0.2/16 brd 172.18.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+u09@u09-VirtualBox:~$ docker network create -d bridge --subnet 192.168.40.0/26 --gateway 192.168.40.1 my192_N1
+24bc71441e6c49318f189a95e9e3cf6ff82ac3abb69d0f37fc0e5f0f4ae59f62
+u09@u09-VirtualBox:~$ docker network create -d bridge --subnet 192.168.40.0/26 --gateway 192.168.40.65 my192_N2
+no matching subnet for gateway 192.168.40.65
+u09@u09-VirtualBox:~$ docker network create -d bridge --subnet 192.168.40.64/26 --gateway 192.168.40.65 my192_N2
+c16aeb94450b10dd6de3f760e7ebea2713e781194af0d5bda514397ca945b8fb
+u09@u09-VirtualBox:~$ docker network create -d bridge --subnet 192.168.40.128/27 --gateway 192.168.40.129 my192_N3
+78c0a4f0ce6e9ff7bec6ff307cbbc24984dd70c0b5171478b66b1556ae10344e
+u09@u09-VirtualBox:~$ docker network create -d bridge --subnet 192.168.40.160/28 --gateway 192.168.40.161 my192_N4
+8b7ccdc3d48dd89cf2af79d1ec3ce4c73964cc81f1e86999a69878be32dc8b71
+u09@u09-VirtualBox:~$ docker network inspect my_bridge
+[
+    {
+        "Name": "my_bridge",
+        "Id": "9cdd91d45f19b9c542abe337117c4c838e809240c5b18216e1b66264466b0227",
+        "Created": "2025-04-10T13:15:20.342045051+07:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "2fe0ab7e2fe6310e2a3e835c40ef1fa84dded8d76de8dc9cc6e3911dd5b81c5d": {
+                "Name": "cont1",
+                "EndpointID": "7d72627e96a8432d9a3f1c16d4a2ba95c8fc622127ac3519393f7501cb98e7ee",
+                "MacAddress": "b2:af:e4:f2:9f:b8",
+                "IPv4Address": "172.18.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+u09@u09-VirtualBox:~$ docker network inspect bridge
+[
+    {
+        "Name": "bridge",
+        "Id": "03f42ab4edb3f1cffa93f80a81ec11ec68951a56e9ac468d62c455f989c74954",
+        "Created": "2025-04-10T13:10:16.310613392+07:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+u09@u09-VirtualBox:~$ docker run -itd --net my_bridge --name cont2 --rm alpine
+28b8cfbfb72ebcdec4f30a93ce2470d5c2a2ed43886c6a3df0fdaaf9ed167c16
+u09@u09-VirtualBox:~$ docker run -itd --net my_bridge --name cont4 --rm alpine
+ad89b6cbc4cf099f247ebfea5458b597cda3aa36e38cdf2b0d3b1634b360a048
+u09@u09-VirtualBox:~$ docker run -itd --net my_bridge --name cont3 --rm alpine
+74e7ee184f3273e4b5ea2ac07da7962089b0ba5978c2b52e511d9c88231e72a4
+u09@u09-VirtualBox:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND     CREATED              STATUS              PORTS     NAMES
+74e7ee184f32   alpine    "/bin/sh"   About a minute ago   Up 58 seconds                 cont3
+ad89b6cbc4cf   alpine    "/bin/sh"   About a minute ago   Up About a minute             cont4
+28b8cfbfb72e   alpine    "/bin/sh"   12 minutes ago       Up 12 minutes                 cont2
+2fe0ab7e2fe6   alpine    "/bin/sh"   58 minutes ago       Up 58 minutes                 cont1
