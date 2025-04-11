@@ -218,3 +218,105 @@ CONTAINER ID   IMAGE     COMMAND     CREATED              STATUS              PO
 ad89b6cbc4cf   alpine    "/bin/sh"   About a minute ago   Up About a minute             cont4
 28b8cfbfb72e   alpine    "/bin/sh"   12 minutes ago       Up 12 minutes                 cont2
 2fe0ab7e2fe6   alpine    "/bin/sh"   58 minutes ago       Up 58 minutes                 cont1
+
+//ДОПОЛНЕНИЕ!!!
+u09@u09-VirtualBox:~$ docker run -itd --net my_bridge --name cont1 --rm alpine
+287bd35b8670215d6b32ad172967d1384ef8c1fdd5612c9dbdc7e2073cb80c42
+^C                  
+^Z
+ccccccc^C                         
+^C
+got 3 SIGTERM/SIGINTs, forcefully exiting
+u09@u09-VirtualBox:~$ docker run -itd --net my_bridge --name cont2 --rm alpine
+6e18334d8969e85ee2c5283f97fc4d6fa631d43ffb23d1b11f178475e914d505
+^C  
+c^Cu09@u09-VirtualBox:~$ ^C
+u09@u09-VirtualBox:~$ docker run -itd --net my_bridge --name cont3 --rm alpine
+b98ff7ba02d9f46013b969dd7b07cc404f033ae5e60c088f23885900350aab8a
+^C^X^X^C^X^C
+got 3 SIGTERM/SIGINTs, forcefully exiting
+u09@u09-VirtualBox:~$ docker run -itd --net my_bridge --name cont4 --rm alpine
+6a3bad357f2165b058ba2be9d68ca071646fd1bbb4e849918e9fd57de447be1b
+u09@u09-VirtualBox:~$ docker exec cont1 ping -c 4 cont2
+PING cont2 (172.18.0.3): 56 data bytes
+64 bytes from 172.18.0.3: seq=0 ttl=64 time=0.235 ms
+64 bytes from 172.18.0.3: seq=1 ttl=64 time=0.131 ms
+64 bytes from 172.18.0.3: seq=2 ttl=64 time=0.239 ms
+64 bytes from 172.18.0.3: seq=3 ttl=64 time=0.129 ms
+
+--- cont2 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.129/0.183/0.239 ms
+u09@u09-VirtualBox:~$ docker exec cont2 ping -c 4 cont3
+PING cont3 (172.18.0.4): 56 data bytes
+64 bytes from 172.18.0.4: seq=0 ttl=64 time=0.065 ms
+64 bytes from 172.18.0.4: seq=1 ttl=64 time=0.133 ms
+64 bytes from 172.18.0.4: seq=2 ttl=64 time=0.174 ms
+64 bytes from 172.18.0.4: seq=3 ttl=64 time=0.137 ms
+
+--- cont3 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.065/0.127/0.174 ms
+u09@u09-VirtualBox:~$ docker exec cont3 ping -c 4 cont4
+PING cont4 (172.18.0.5): 56 data bytes
+64 bytes from 172.18.0.5: seq=0 ttl=64 time=0.068 ms
+64 bytes from 172.18.0.5: seq=1 ttl=64 time=0.132 ms
+64 bytes from 172.18.0.5: seq=2 ttl=64 time=0.129 ms
+64 bytes from 172.18.0.5: seq=3 ttl=64 time=0.100 ms
+
+--- cont4 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.068/0.107/0.132 ms
+u09@u09-VirtualBox:~$ 
+u09@u09-VirtualBox:~$ docker exec cont1 traceroute mail.ru
+traceroute to mail.ru (217.69.139.202), 30 hops max, 46 byte packets
+ 1  u09-VirtualBox.local (172.18.0.1)  0.011 ms  0.011 ms  0.010 ms
+ 2  _gateway (10.0.2.2)  0.360 ms  0.211 ms  0.278 ms
+ 3  *  *  *
+ 4  192.168.88.1 (192.168.88.1)  1.336 ms  1.160 ms  1.034 ms
+ 5  host-89-251-106-133.bb-nsk.sib.mts.ru (89.251.106.133)  2.116 ms  2.003 ms  1.992 ms
+ 6  *  *  *
+ 7  *  *  *
+ 8  *^Ccontext canceled
+u09@u09-VirtualBox:~$ docker exec cont1 traceroute 192.168.40.0
+traceroute to 192.168.40.0 (192.168.40.0), 30 hops max, 46 byte packets
+ 1  u09-VirtualBox.local (172.18.0.1)  0.005 ms  0.009 ms  0.002 ms
+ 2  *  *  *
+ 3  *  *  *
+ 4  *  *^Ccontext canceled
+u09@u09-VirtualBox:~$ docker exec cont1 traceroute 192.168.40.64
+traceroute to 192.168.40.64 (192.168.40.64), 30 hops max, 46 byte packets
+ 1  u09-VirtualBox.local (172.18.0.1)  0.003 ms  0.003 ms  0.002 ms
+ 2  *  *  *
+ 3  *  *  *
+ 4  *  *  *
+ 5  *  *^Ccontext canceled
+u09@u09-VirtualBox:~$ docker exec cont1 traceroute 192.168.40.128
+traceroute to 192.168.40.128 (192.168.40.128), 30 hops max, 46 byte packets
+ 1  u09-VirtualBox.local (172.18.0.1)  0.005 ms  0.003 ms  0.003 ms
+ 2  *  *  *
+ 3  *^Ccontext canceled
+u09@u09-VirtualBox:~$ docker exec cont1 traceroute 192.168.40.160
+traceroute to 192.168.40.160 (192.168.40.160), 30 hops max, 46 byte packets
+ 1  u09-VirtualBox.local (172.18.0.1)  0.004 ms  0.003 ms  0.002 ms
+ 2  *  *  *
+ 3  *  *^Ccontext canceled
+u09@u09-VirtualBox:~$ docker cont1 api ip a
+docker: unknown command: docker cont1
+
+Run 'docker --help' for more information
+u09@u09-VirtualBox:~$ docker cont1 ip a
+docker: unknown command: docker cont1
+
+Run 'docker --help' for more information
+u09@u09-VirtualBox:~$ docker exec cont1 ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0@if10: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP 
+    link/ether 32:92:ca:c9:d4:90 brd ff:ff:ff:ff:ff:ff
+    inet 172.18.0.2/16 brd 172.18.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
