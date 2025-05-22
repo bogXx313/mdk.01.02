@@ -1,0 +1,1873 @@
+u09@u09-VirtualBox:~$ sudo fdisk -l | grep sd
+[sudo] пароль для u09: 
+Диск /dev/sda: 25 GiB, 26843545600 байт, 52428800 секторов
+/dev/sda1     2048     4095     2048     1M BIOS boot
+/dev/sda2     4096  1054719  1050624   513M EFI
+/dev/sda3  1054720 52426751 51372032  24,5G Файловая система Linux
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+Диск /dev/sdc: 5 GiB, 5368709120 байт, 10485760 секторов
+u09@u09-VirtualBox:~$ sudo gdisk /dev/sdb
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: not present
+  BSD: not present
+  APM: not present
+  GPT: not present
+
+Creating new GPT entries in memory.
+
+Command (? for help): ?
+b	back up GPT data to a file
+c	change a partition's name
+d	delete a partition
+i	show detailed information on a partition
+l	list known partition types
+n	add a new partition
+o	create a new empty GUID partition table (GPT)
+p	print the partition table
+q	quit without saving changes
+r	recovery and transformation options (experts only)
+s	sort partitions
+t	change a partition's type code
+v	verify disk
+w	write table to disk and exit
+x	extra functionality (experts only)
+?	print this menu
+
+Command (? for help): o
+This option deletes all partitions and creates a new protective MBR.
+Proceed? (Y/N): y
+
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-10485726, default = 2048) or {+-}size{KMGTP}: +2,5G
+Information: Moved requested sector from 2050 to 2048 in
+order to align on 2048-sector boundaries.
+Use 'l' on the experts' menu to adjust alignment
+Last sector (2048-10485726, default = 10485726) or {+-}size{KMGTP}: +2,5G
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): n
+Partition number (2-128, default 2): 
+First sector (34-10485726, default = 4096) or {+-}size{KMGTP}: 
+Last sector (4096-10485726, default = 10485726) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdb.
+The operation has completed successfully.
+u09@u09-VirtualBox:~$ sudo mkfs.ext4 /dev/sdb1
+mke2fs 1.46.5 (30-Dec-2021)
+mkfs.ext4: inode_size (256) * inodes_count (0) too big for a
+	filesystem with 0 blocks, specify higher inode_ratio (-i)
+	or lower inode count (-N).
+
+u09@u09-VirtualBox:~$ fdisk -l
+fdisk: невозможно открыть /dev/loop0: Отказано в доступе
+fdisk: невозможно открыть /dev/loop2: Отказано в доступе
+fdisk: невозможно открыть /dev/loop3: Отказано в доступе
+fdisk: невозможно открыть /dev/loop4: Отказано в доступе
+fdisk: невозможно открыть /dev/loop5: Отказано в доступе
+fdisk: невозможно открыть /dev/loop6: Отказано в доступе
+fdisk: невозможно открыть /dev/loop7: Отказано в доступе
+fdisk: невозможно открыть /dev/sda: Отказано в доступе
+fdisk: невозможно открыть /dev/sdb: Отказано в доступе
+fdisk: невозможно открыть /dev/sdc: Отказано в доступе
+fdisk: невозможно открыть /dev/loop8: Отказано в доступе
+fdisk: невозможно открыть /dev/loop9: Отказано в доступе
+fdisk: невозможно открыть /dev/loop10: Отказано в доступе
+fdisk: невозможно открыть /dev/loop11: Отказано в доступе
+fdisk: невозможно открыть /dev/loop12: Отказано в доступе
+fdisk: невозможно открыть /dev/loop13: Отказано в доступе
+fdisk: невозможно открыть /dev/loop14: Отказано в доступе
+fdisk: невозможно открыть /dev/loop15: Отказано в доступе
+fdisk: невозможно открыть /dev/loop16: Отказано в доступе
+fdisk: невозможно открыть /dev/loop17: Отказано в доступе
+u09@u09-VirtualBox:~$ sudo fdisk 
+fdisk: неправильное использование
+Try 'fdisk --help' for more information.
+u09@u09-VirtualBox:~$ sudo fdisk -l
+Диск /dev/loop0: 4 KiB, 4096 байт, 8 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop2: 63,75 MiB, 66850816 байт, 130568 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop3: 73,89 MiB, 77475840 байт, 151320 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop4: 73,89 MiB, 77479936 байт, 151328 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop5: 237,21 MiB, 248729600 байт, 485800 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop6: 241,55 MiB, 253280256 байт, 494688 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop7: 349,7 MiB, 366682112 байт, 716176 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/sda: 25 GiB, 26843545600 байт, 52428800 секторов
+Disk model: VBOX HARDDISK   
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+Тип метки диска: gpt
+Идентификатор диска: 52BA9DF0-C7D7-42D1-9CE9-98AAA46D2B3D
+
+Устр-во     начало    Конец  Секторы Размер Тип
+/dev/sda1     2048     4095     2048     1M BIOS boot
+/dev/sda2     4096  1054719  1050624   513M EFI
+/dev/sda3  1054720 52426751 51372032  24,5G Файловая система Linux
+
+
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+Disk model: VBOX HARDDISK   
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+Тип метки диска: gpt
+Идентификатор диска: CD2F7C60-F2C0-419C-B70C-AF56F262B9A7
+
+Устр-во    начало    Конец  Секторы Размер Тип
+/dev/sdb1    2048     2049        2     1K Файловая система Linux
+/dev/sdb2    4096 10485726 10481631     5G Файловая система Linux
+
+
+Диск /dev/sdc: 5 GiB, 5368709120 байт, 10485760 секторов
+Disk model: VBOX HARDDISK   
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop8: 485,52 MiB, 509100032 байт, 994336 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop9: 516,01 MiB, 541073408 байт, 1056784 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop10: 91,69 MiB, 96141312 байт, 187776 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop11: 12,2 MiB, 12791808 байт, 24984 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop12: 12,32 MiB, 12922880 байт, 25240 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop13: 44,45 MiB, 46604288 байт, 91024 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop14: 50,89 MiB, 53366784 байт, 104232 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop15: 568 KiB, 581632 байт, 1136 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop16: 452 KiB, 462848 байт, 904 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop17: 63,77 MiB, 66867200 байт, 130600 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+u09@u09-VirtualBox:~$ sudo fdisk -l | grep sdb
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdb1    2048     2049        2     1K Файловая система Linux
+/dev/sdb2    4096 10485726 10481631     5G Файловая система Linux
+u09@u09-VirtualBox:~$ sudo gdisk /dev/sdb
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: protective
+  BSD: not present
+  APM: not present
+  GPT: present
+
+Found valid GPT with protective MBR; using GPT.
+
+Command (? for help): n
+Partition number (3-128, default 3): 
+First sector (34-4095, default = 2050) or {+-}size{KMGTP}: 
+Last sector (2050-4095, default = 4095) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): ?
+b	back up GPT data to a file
+c	change a partition's name
+d	delete a partition
+i	show detailed information on a partition
+l	list known partition types
+n	add a new partition
+o	create a new empty GUID partition table (GPT)
+p	print the partition table
+q	quit without saving changes
+r	recovery and transformation options (experts only)
+s	sort partitions
+t	change a partition's type code
+v	verify disk
+w	write table to disk and exit
+x	extra functionality (experts only)
+?	print this menu
+
+Command (? for help): d
+Partition number (1-3): 1
+
+Command (? for help): d
+Partition number (2-3): 2
+
+Command (? for help): d
+Using 3
+
+Command (? for help): 3
+b	back up GPT data to a file
+c	change a partition's name
+d	delete a partition
+i	show detailed information on a partition
+l	list known partition types
+n	add a new partition
+o	create a new empty GUID partition table (GPT)
+p	print the partition table
+q	quit without saving changes
+r	recovery and transformation options (experts only)
+s	sort partitions
+t	change a partition's type code
+v	verify disk
+w	write table to disk and exit
+x	extra functionality (experts only)
+?	print this menu
+
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-10485726, default = 2048) or {+-}size{KMGTP}: 
+Last sector (2048-10485726, default = 10485726) or {+-}size{KMGTP}: +2,5G
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): n
+Partition number (2-128, default 2): 2
+First sector (34-10485726, default = 4096) or {+-}size{KMGTP}: 
+Last sector (4096-10485726, default = 10485726) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdb.
+The operation has completed successfully.
+u09@u09-VirtualBox:~$ sudo fdisk -l
+Диск /dev/loop0: 4 KiB, 4096 байт, 8 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop2: 63,75 MiB, 66850816 байт, 130568 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop3: 73,89 MiB, 77475840 байт, 151320 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop4: 73,89 MiB, 77479936 байт, 151328 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop5: 237,21 MiB, 248729600 байт, 485800 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop6: 241,55 MiB, 253280256 байт, 494688 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop7: 349,7 MiB, 366682112 байт, 716176 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/sda: 25 GiB, 26843545600 байт, 52428800 секторов
+Disk model: VBOX HARDDISK   
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+Тип метки диска: gpt
+Идентификатор диска: 52BA9DF0-C7D7-42D1-9CE9-98AAA46D2B3D
+
+Устр-во     начало    Конец  Секторы Размер Тип
+/dev/sda1     2048     4095     2048     1M BIOS boot
+/dev/sda2     4096  1054719  1050624   513M EFI
+/dev/sda3  1054720 52426751 51372032  24,5G Файловая система Linux
+
+
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+Disk model: VBOX HARDDISK   
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+Тип метки диска: gpt
+Идентификатор диска: CD2F7C60-F2C0-419C-B70C-AF56F262B9A7
+
+Устр-во    начало    Конец  Секторы Размер Тип
+/dev/sdb1    2048     2049        2     1K Файловая система Linux
+/dev/sdb2    4096 10485726 10481631     5G Файловая система Linux
+
+
+Диск /dev/sdc: 5 GiB, 5368709120 байт, 10485760 секторов
+Disk model: VBOX HARDDISK   
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop8: 485,52 MiB, 509100032 байт, 994336 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop9: 516,01 MiB, 541073408 байт, 1056784 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop10: 91,69 MiB, 96141312 байт, 187776 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop11: 12,2 MiB, 12791808 байт, 24984 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop12: 12,32 MiB, 12922880 байт, 25240 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop13: 44,45 MiB, 46604288 байт, 91024 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop14: 50,89 MiB, 53366784 байт, 104232 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop15: 568 KiB, 581632 байт, 1136 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop16: 452 KiB, 462848 байт, 904 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop17: 63,77 MiB, 66867200 байт, 130600 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+u09@u09-VirtualBox:~$ sudo fdisk -l | grep sdb
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdb1    2048     2049        2     1K Файловая система Linux
+/dev/sdb2    4096 10485726 10481631     5G Файловая система Linux
+u09@u09-VirtualBox:~$ sudo gdisk /dev/sdb
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: protective
+  BSD: not present
+  APM: not present
+  GPT: present
+
+Found valid GPT with protective MBR; using GPT.
+
+Command (? for help): d
+Partition number (1-2): 1
+
+Command (? for help): d
+Using 2
+
+Command (? for help): 2
+b	back up GPT data to a file
+c	change a partition's name
+d	delete a partition
+i	show detailed information on a partition
+l	list known partition types
+n	add a new partition
+o	create a new empty GUID partition table (GPT)
+p	print the partition table
+q	quit without saving changes
+r	recovery and transformation options (experts only)
+s	sort partitions
+t	change a partition's type code
+v	verify disk
+w	write table to disk and exit
+x	extra functionality (experts only)
+?	print this menu
+
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-10485726, default = 2048) or {+-}size{KMGTP}: 
+Last sector (2048-10485726, default = 10485726) or {+-}size{KMGTP}: +2G
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): n
+Partition number (2-128, default 2): 
+First sector (34-10485726, default = 4196352) or {+-}size{KMGTP}: 
+Last sector (4196352-10485726, default = 10485726) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdb.
+The operation has completed successfully.
+u09@u09-VirtualBox:~$ sudo fdisk -l | grep sdb
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdb1     2048  4196351 4194304     2G Файловая система Linux
+/dev/sdb2  4196352 10485726 6289375     3G Файловая система Linux
+u09@u09-VirtualBox:~$ sudo mkfs.ext4 /dev/sdb1
+mke2fs 1.46.5 (30-Dec-2021)
+Creating filesystem with 524288 4k blocks and 131072 inodes
+Filesystem UUID: 83f24462-26f6-4aa8-b3e2-a7aef44c2753
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912
+
+Allocating group tables: done                            
+Сохранение таблицы inod'ов: done                            
+Создание журнала (16384 блоков): готово
+Writing superblocks and filesystem accounting information: готово
+
+u09@u09-VirtualBox:~$ sudo mkfs.ext4 /dev/sdb2
+mke2fs 1.46.5 (30-Dec-2021)
+Creating filesystem with 786171 4k blocks and 196608 inodes
+Filesystem UUID: 38ffe90b-b994-4a66-a760-8e77a0bb2885
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912
+
+Allocating group tables: done                            
+Сохранение таблицы inod'ов: done                            
+Создание журнала (16384 блоков): готово
+Writing superblocks and filesystem accounting information: готово
+
+u09@u09-VirtualBox:~$ sudo mkfs.xfs /dev/sdb2
+sudo: mkfs.xfs: команда не найдена
+u09@u09-VirtualBox:~$ sudo apt install xfs
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Пакет xfs недоступен, но упомянут в списке зависимостей другого
+пакета. Это может означать, что пакет отсутствует, устарел или
+доступен из источников, не упомянутых в sources.list
+
+E: Для пакета «xfs» не найден кандидат на установку
+u09@u09-VirtualBox:~$ sudo apt install xfsprogs
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/locОжидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/lock-frontend. Она удерживается процессом 3727 (unattended-upgr)       
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/locОжидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/lock-frontend. Она удерживается процессом 3727 (unattended-upgr)       
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/locОжидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/lock-frontend. Она удерживается процессом 3727 (unattended-upgr)       
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/locОжидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/lock-frontend. Она удерживается процессом 3727 (unattended-upgr)       
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/locОжидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/lock-frontend. Она удерживается процессом 3727 (unattended-upgr)       
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/locОжидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/lock-frontend. Она удерживается процессом 3727 (unattended-upgr)       
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/locОжидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/lock-frontend. Она удерживается процессом 3727 (unattended-upgr)       
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/locОжидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/lock-frontend. Она удерживается процессом 3727 (unattended-upgr)       
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/locОжидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/lock-frontend. Она удерживается процессом 3727 (unattended-upgr)       
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/locОжидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/lock-frontend. Она удерживается процессом 3727 (unattended-upgr)       
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/locОжидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/lock-frontend. Она удерживается процессом 3727 (unattended-upgr)        
+Ожидание блокировки кэша: Не удалось получить блокировку файла /var/lib/dpkg/loc^Cfrontend. Она удерживается процессом 3727 (unattended-upgr)… 11с
+u09@u09-VirtualBox:~$ sudo apt install xfs
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Пакет xfs недоступен, но упомянут в списке зависимостей другого
+пакета. Это может означать, что пакет отсутствует, устарел или
+доступен из источников, не упомянутых в sources.list
+
+E: Для пакета «xfs» не найден кандидат на установку
+u09@u09-VirtualBox:~$ sudo apt install xfsprogs
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Следующие пакеты устанавливались автоматически и больше не требуются:
+  libwpe-1.0-1 libwpebackend-fdo-1.0-1
+Для их удаления используйте «sudo apt autoremove».
+Предлагаемые пакеты:
+  xfsdump attr quota
+Следующие НОВЫЕ пакеты будут установлены:
+  xfsprogs
+Обновлено 0 пакетов, установлено 1 новых пакетов, для удаления отмечено 0 пакетов, и 52 пакетов не обновлено.
+Необходимо скачать 870 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 2 851 kB.
+Пол:1 http://ru.archive.ubuntu.com/ubuntu jammy-updates/main amd64 xfsprogs amd64 5.13.0-1ubuntu2.1 [870 kB]
+Получено 870 kB за 17с (51,0 kB/s)                                             
+Выбор ранее не выбранного пакета xfsprogs.
+(Чтение базы данных … на данный момент установлено 185944 файла и каталога.)
+Подготовка к распаковке …/xfsprogs_5.13.0-1ubuntu2.1_amd64.deb …
+Распаковывается xfsprogs (5.13.0-1ubuntu2.1) …
+Настраивается пакет xfsprogs (5.13.0-1ubuntu2.1) …
+update-initramfs: deferring update (trigger activated)
+Обрабатываются триггеры для man-db (2.10.2-1) …
+Обрабатываются триггеры для libc-bin (2.35-0ubuntu3.9) …
+Обрабатываются триггеры для initramfs-tools (0.140ubuntu13.4) …
+update-initramfs: Generating /boot/initrd.img-6.8.0-58-generic
+u09@u09-VirtualBox:~$ sudo mkfs.xfs /dev/sdb2
+mkfs.xfs: /dev/sdb2 appears to contain an existing filesystem (ext4).
+mkfs.xfs: Use the -f option to force overwrite.
+u09@u09-VirtualBox:~$ sudo mkfs.xfs -f /dev/sdb2
+meta-data=/dev/sdb2              isize=512    agcount=4, agsize=196543 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=0 inobtcount=0
+data     =                       bsize=4096   blocks=786171, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+u09@u09-VirtualBox:~$ sudo gdisk /dev/sdc
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: not present
+  BSD: not present
+  APM: not present
+  GPT: not present
+
+Creating new GPT entries in memory.
+
+Command (? for help): o
+This option deletes all partitions and creates a new protective MBR.
+Proceed? (Y/N): y
+
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-10485726, default = 2048) or {+-}size{KMGTP}: 
+Last sector (2048-10485726, default = 10485726) or {+-}size{KMGTP}: +2G
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): n
+Partition number (2-128, default 2): 
+First sector (34-10485726, default = 4196352) or {+-}size{KMGTP}: 
+Last sector (4196352-10485726, default = 10485726) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdc.
+The operation has completed successfully.
+u09@u09-VirtualBox:~$ sudo fdisk -l | grep sdc
+Диск /dev/sdc: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdc1     2048  4196351 4194304     2G Файловая система Linux
+/dev/sdc2  4196352 10485726 6289375     3G Файловая система Linux
+u09@u09-VirtualBox:~$ sudo mkfs.btrfs
+sudo: mkfs.btrfs: команда не найдена
+u09@u09-VirtualBox:~$ sudo apt install btr
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+E: Невозможно найти пакет btr
+u09@u09-VirtualBox:~$ sudo apt install btrfs-progs
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Следующие пакеты устанавливались автоматически и больше не требуются:
+  libwpe-1.0-1 libwpebackend-fdo-1.0-1
+Для их удаления используйте «sudo apt autoremove».
+Предлагаемые пакеты:
+  duperemove
+Следующие НОВЫЕ пакеты будут установлены:
+  btrfs-progs
+Обновлено 0 пакетов, установлено 1 новых пакетов, для удаления отмечено 0 пакетов, и 52 пакетов не обновлено.
+Необходимо скачать 824 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 4 291 kB.
+Пол:1 http://ru.archive.ubuntu.com/ubuntu jammy/main amd64 btrfs-progs amd64 5.16.2-1 [824 kB]
+Получено 824 kB за 1с (1 309 kB/s)  
+Выбор ранее не выбранного пакета btrfs-progs.
+(Чтение базы данных … на данный момент установлено 186010 файлов и каталогов.)
+Подготовка к распаковке …/btrfs-progs_5.16.2-1_amd64.deb …
+Распаковывается btrfs-progs (5.16.2-1) …
+Настраивается пакет btrfs-progs (5.16.2-1) …
+Обрабатываются триггеры для initramfs-tools (0.140ubuntu13.4) …
+update-initramfs: Generating /boot/initrd.img-6.8.0-58-generic
+Обрабатываются триггеры для man-db (2.10.2-1) …
+u09@u09-VirtualBox:~$ sudo mkfs.btrfs /dev/sdc1
+btrfs-progs v5.16.2
+See http://btrfs.wiki.kernel.org for more information.
+
+Performing full device TRIM /dev/sdc1 (2.00GiB) ...
+NOTE: several default settings have changed in version 5.15, please make sure
+      this does not affect your deployments:
+      - DUP for metadata (-m dup)
+      - enabled no-holes (-O no-holes)
+      - enabled free-space-tree (-R free-space-tree)
+
+Label:              (null)
+UUID:               d4a7fce6-3823-456f-99fa-a254012dfc6d
+Node size:          16384
+Sector size:        4096
+Filesystem size:    2.00GiB
+Block group profiles:
+  Data:             single            8.00MiB
+  Metadata:         DUP             102.38MiB
+  System:           DUP               8.00MiB
+SSD detected:       no
+Zoned device:       no
+Incompat features:  extref, skinny-metadata, no-holes
+Runtime features:   free-space-tree
+Checksum:           crc32c
+Number of devices:  1
+Devices:
+   ID        SIZE  PATH
+    1     2.00GiB  /dev/sdc1
+
+u09@u09-VirtualBox:~$ sudo mkfs.ext2 /dev/sdc2
+mke2fs 1.46.5 (30-Dec-2021)
+Creating filesystem with 786171 4k blocks and 196608 inodes
+Filesystem UUID: 7e7aa10f-1684-4bf4-9b5b-197656fed8cb
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912
+
+Allocating group tables: done                            
+Сохранение таблицы inod'ов: done                            
+Writing superblocks and filesystem accounting information: готово
+
+u09@u09-VirtualBox:~$ sudo gparted
+sudo: gparted: команда не найдена
+u09@u09-VirtualBox:~$ sudo apt install gparted
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Следующие пакеты устанавливались автоматически и больше не требуются:
+  libwpe-1.0-1 libwpebackend-fdo-1.0-1
+Для их удаления используйте «sudo apt autoremove».
+Будут установлены следующие дополнительные пакеты:
+  gparted-common
+Предлагаемые пакеты:
+  dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools
+  exfatprogs
+Следующие НОВЫЕ пакеты будут установлены:
+  gparted gparted-common
+Обновлено 0 пакетов, установлено 2 новых пакетов, для удаления отмечено 0 пакетов, и 52 пакетов не обновлено.
+Необходимо скачать 490 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 2 128 kB.
+Хотите продолжить? [Д/н] y
+Пол:1 http://ru.archive.ubuntu.com/ubuntu jammy/main amd64 gparted-common all 1.3.1-1ubuntu1 [71,9 kB]
+Пол:2 http://ru.archive.ubuntu.com/ubuntu jammy/main amd64 gparted amd64 1.3.1-1ubuntu1 [418 kB]
+Получено 490 kB за 1с (903 kB/s)   
+Выбор ранее не выбранного пакета gparted-common.
+(Чтение базы данных … на данный момент установлено 186054 файла и каталога.)
+Подготовка к распаковке …/gparted-common_1.3.1-1ubuntu1_all.deb …
+Распаковывается gparted-common (1.3.1-1ubuntu1) …
+Выбор ранее не выбранного пакета gparted.
+Подготовка к распаковке …/gparted_1.3.1-1ubuntu1_amd64.deb …
+^[[BРаспаковывается gparted (1.3.1-1ubuntu1) …
+Настраивается пакет gparted-common (1.3.1-1ubuntu1) …
+Настраивается пакет gparted (1.3.1-1ubuntu1) …
+Обрабатываются триггеры для mailcap (3.70+nmu1ubuntu1) …
+Обрабатываются триггеры для desktop-file-utils (0.26-1ubuntu3) …
+Обрабатываются триггеры для hicolor-icon-theme (0.17-2) …
+Обрабатываются триггеры для gnome-menus (3.36.0-1ubuntu3) …
+Обрабатываются триггеры для man-db (2.10.2-1) …
+u09@u09-VirtualBox:~$ sudo gparted
+GParted 1.3.1
+configuration --enable-libparted-dmraid --enable-online-resize
+libparted 3.4
+u09@u09-VirtualBox:~$ sudo fdisk -l | grep sdd
+[sudo] пароль для u09: 
+u09@u09-VirtualBox:~$ sudo fdisk -l | grep sdd
+u09@u09-VirtualBox:~$ sudo fdisk -l | grep sdd
+u09@u09-VirtualBox:~$ sudo fdisk -l | grep sd
+Диск /dev/sda: 25 GiB, 26843545600 байт, 52428800 секторов
+/dev/sda1     2048     4095     2048     1M BIOS boot
+/dev/sda2     4096  1054719  1050624   513M EFI
+/dev/sda3  1054720 52426751 51372032  24,5G Файловая система Linux
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdb1     2048  4196351 4194304     2G Файловая система Linux
+/dev/sdb2  4196352 10485726 6289375     3G Файловая система Linux
+Диск /dev/sdc: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdc1     2048  4196351 4194304     2G Файловая система Linux
+/dev/sdc2  4196352 10485726 6289375     3G Файловая система Linux
+u09@u09-VirtualBox:~$ sudo lsblk /dev/sdd1
+lsblk: /dev/sdd1: не блочное устройство
+u09@u09-VirtualBox:~$ sudo lsblk /dev/sd1
+lsblk: /dev/sd1: не блочное устройство
+u09@u09-VirtualBox:~$ sudo lsblk /dev/sdc1
+NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
+sdc1   8:33   0   2G  0 part 
+u09@u09-VirtualBox:~$ sudo lsblk -f /dev/sdd1
+lsblk: /dev/sdd1: не блочное устройство
+u09@u09-VirtualBox:~$ sudo lsblk -f /dev/sdc1
+NAME FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdc1 btrfs              d4a7fce6-3823-456f-99fa-a254012dfc6d                
+u09@u09-VirtualBox:~$ sudo lsblk -f /dev/sdc2
+NAME FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdc2 ext2   1.0         7e7aa10f-1684-4bf4-9b5b-197656fed8cb                
+u09@u09-VirtualBox:~$ sudo -s
+root@u09-VirtualBox:/home/u09# cd /mnt
+root@u09-VirtualBox:/mnt# ls -l
+итого 0
+root@u09-VirtualBox:/mnt# mkdir ext4
+root@u09-VirtualBox:/mnt# mkdir xfs
+root@u09-VirtualBox:/mnt# mkdir dtrfs
+root@u09-VirtualBox:/mnt# mkdir xfs2
+root@u09-VirtualBox:/mnt# mkdir ext2
+root@u09-VirtualBox:/mnt# mkdir btrfs2
+root@u09-VirtualBox:/mnt# chown student:student ext4 ext2 xfs dtrfs xfs2 btrfs2
+chown: неверный пользователь: «student:student»
+root@u09-VirtualBox:/mnt# mkdir ext4
+mkdir: невозможно создать каталог «ext4»: Файл существует
+root@u09-VirtualBox:/mnt# mkdir btrfs
+root@u09-VirtualBox:/mnt# chown student:student ext4 ext2 xfs btrfs xfs2 btrfs2
+chown: неверный пользователь: «student:student»
+root@u09-VirtualBox:/mnt# chown u09:u09 ext4 ext2 xfs btrfs xfs2 btrfs2
+root@u09-VirtualBox:/mnt# ls -l
+итого 28
+drwxr-xr-x 2 u09  u09  4096 мая 16 13:16 btrfs
+drwxr-xr-x 2 u09  u09  4096 мая 16 13:13 btrfs2
+drwxr-xr-x 2 root root 4096 мая 16 13:12 dtrfs
+drwxr-xr-x 2 u09  u09  4096 мая 16 13:13 ext2
+drwxr-xr-x 2 u09  u09  4096 мая 16 13:11 ext4
+drwxr-xr-x 2 u09  u09  4096 мая 16 13:12 xfs
+drwxr-xr-x 2 u09  u09  4096 мая 16 13:12 xfs2
+root@u09-VirtualBox:/mnt# mount /dev/sdb1 ext4
+root@u09-VirtualBox:/mnt# ls -l ext4/
+итого 16
+drwx------ 2 root root 16384 мая 16 11:38 lost+found
+root@u09-VirtualBox:/mnt# mount /dev/sdb2 xfs
+root@u09-VirtualBox:/mnt# mount /dev/sdc1 btrfs
+root@u09-VirtualBox:/mnt# mount /dev/sdc2 ext2
+root@u09-VirtualBox:/mnt# ls -l ext2/
+итого 16
+drwx------ 2 root root 16384 мая 16 12:11 lost+found
+root@u09-VirtualBox:/mnt# exit
+exit
+u09@u09-VirtualBox:~$ cd /mnt/ext4
+u09@u09-VirtualBox:/mnt/ext4$ ls -l
+итого 16
+drwx------ 2 root root 16384 мая 16 11:38 lost+found
+u09@u09-VirtualBox:/mnt/ext4$ sudo ls -l
+итого 16
+drwx------ 2 root root 16384 мая 16 11:38 lost+found
+u09@u09-VirtualBox:/mnt/ext4$ sudo ls -l ../
+итого 36
+drwxr-xr-x 1 root root    0 мая 16 12:10 btrfs
+drwxr-xr-x 2 u09  u09  4096 мая 16 13:13 btrfs2
+drwxr-xr-x 2 root root 4096 мая 16 13:12 dtrfs
+drwxr-xr-x 3 root root 4096 мая 16 12:11 ext2
+drwxr-xr-x 3 root root 4096 мая 16 11:38 ext4
+drwxr-xr-x 2 root root    6 мая 16 12:02 xfs
+drwxr-xr-x 2 u09  u09  4096 мая 16 13:12 xfs2
+u09@u09-VirtualBox:/mnt/ext4$ sudo -s
+root@u09-VirtualBox:/mnt/ext4# chown u09:u09 ext4 ext2 xfs btrfs xfs2 dtrfs2
+chown: невозможно получить доступ к 'ext4': Нет такого файла или каталога
+chown: невозможно получить доступ к 'ext2': Нет такого файла или каталога
+chown: невозможно получить доступ к 'xfs': Нет такого файла или каталога
+chown: невозможно получить доступ к 'btrfs': Нет такого файла или каталога
+chown: невозможно получить доступ к 'xfs2': Нет такого файла или каталога
+chown: невозможно получить доступ к 'dtrfs2': Нет такого файла или каталога
+root@u09-VirtualBox:/mnt/ext4# cd mnt
+bash: cd: mnt: Нет такого файла или каталога
+root@u09-VirtualBox:/mnt/ext4# cd /mnt
+root@u09-VirtualBox:/mnt# chown u09:u09 ext4 ext2 xfs btrfs xfs2 dtrfs2
+chown: невозможно получить доступ к 'dtrfs2': Нет такого файла или каталога
+root@u09-VirtualBox:/mnt# chown u09:u09 ext4 ext2 xfs btrfs xfs2 btrfs2
+root@u09-VirtualBox:/mnt# exit
+exit
+u09@u09-VirtualBox:/mnt/ext4$ touch test.txt
+u09@u09-VirtualBox:/mnt/ext4$ ls -l
+итого 16
+drwx------ 2 root root 16384 мая 16 11:38 lost+found
+-rw-rw-r-- 1 u09  u09      0 мая 16 13:25 test.txt
+u09@u09-VirtualBox:/mnt/ext4$ cat > test.txt
+123456
+1234566
+12345678^C
+u09@u09-VirtualBox:/mnt/ext4$ cat >> test.txt
+ghgyhyhy^C
+u09@u09-VirtualBox:/mnt/ext4$ cat test.txt
+123456
+1234566
+u09@u09-VirtualBox:/mnt/ext4$ cat >> test.txt
+jgjjhgjhiojh
+igjgiojtigo^C
+u09@u09-VirtualBox:/mnt/ext4$ cat test.txt
+123456
+1234566
+jgjjhgjhiojh
+u09@u09-VirtualBox:/mnt/ext4$ sudo lsblk -f /dev/sdb >> test.txt
+u09@u09-VirtualBox:/mnt/ext4$ cat test.txt
+123456
+1234566
+jgjjhgjhiojh
+NAME   FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdb                                                                           
+├─sdb1 ext4   1.0         83f24462-26f6-4aa8-b3e2-a7aef44c2753    1,8G     0% /mnt/ext4
+└─sdb2 xfs                d5dd2216-5470-4051-852a-9eecd87f60bd    2,9G     2% /mnt/xfs
+u09@u09-VirtualBox:/mnt/ext4$ sudo lsblk -f /dev/sdb1
+NAME FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdb1 ext4   1.0         83f24462-26f6-4aa8-b3e2-a7aef44c2753    1,8G     0% /mnt/ext4
+u09@u09-VirtualBox:/mnt/ext4$ sudo lsblk -f /dev/sdc2
+NAME FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdc2 ext2   1.0         7e7aa10f-1684-4bf4-9b5b-197656fed8cb    2,8G     0% /mnt/ext2
+u09@u09-VirtualBox:/mnt/ext4$ sudo lsblk -f /dev/sdc1
+NAME FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdc1 btrfs              d4a7fce6-3823-456f-99fa-a254012dfc6d    1,8G     0% /mnt/btrfs
+u09@u09-VirtualBox:/mnt/ext4$ df
+Файл.система   1K-блоков Использовано Доступно Использовано% Cмонтировано в
+tmpfs             201584         1676   199908            1% /run
+/dev/sda3       25106692     19898292  3907716           84% /
+tmpfs            1007916            0  1007916            0% /dev/shm
+tmpfs               5120            4     5116            1% /run/lock
+/dev/sda2         524252         6228   518024            2% /boot/efi
+tmpfs             201580          108   201472            1% /run/user/1000
+/dev/sdb1        1992552           28  1871284            1% /mnt/ext4
+/dev/sdb2        3134444        54876  3079568            2% /mnt/xfs
+/dev/sdc1        2097152         5920  1870080            1% /mnt/btrfs
+/dev/sdc2        3090708           24  2933452            1% /mnt/ext2
+u09@u09-VirtualBox:/mnt/ext4$ df -h
+Файл.система   Размер Использовано  Дост Использовано% Cмонтировано в
+tmpfs            197M         1,7M  196M            1% /run
+/dev/sda3         24G          19G  3,8G           84% /
+tmpfs            985M            0  985M            0% /dev/shm
+tmpfs            5,0M         4,0K  5,0M            1% /run/lock
+/dev/sda2        512M         6,1M  506M            2% /boot/efi
+tmpfs            197M         108K  197M            1% /run/user/1000
+/dev/sdb1        2,0G          28K  1,8G            1% /mnt/ext4
+/dev/sdb2        3,0G          54M  3,0G            2% /mnt/xfs
+/dev/sdc1        2,0G         5,8M  1,8G            1% /mnt/btrfs
+/dev/sdc2        3,0G          24K  2,8G            1% /mnt/ext2
+u09@u09-VirtualBox:/mnt/ext4$ df -i
+Файл.система    Iнодов IИспользовано IСвободно IИспользовано% Cмонтировано в
+tmpfs           251979          1132    250847             1% /run
+/dev/sda3      1605632        354728   1250904            23% /
+tmpfs           251979             1    251978             1% /dev/shm
+tmpfs           251979             4    251975             1% /run/lock
+/dev/sda2            0             0         0              - /boot/efi
+tmpfs            50395           150     50245             1% /run/user/1000
+/dev/sdb1       131072            12    131060             1% /mnt/ext4
+/dev/sdb2      1572288             3   1572285             1% /mnt/xfs
+/dev/sdc1            0             0         0              - /mnt/btrfs
+/dev/sdc2       196608            11    196597             1% /mnt/ext2
+u09@u09-VirtualBox:/mnt/ext4$ ls -it test.txt
+12 test.txt
+u09@u09-VirtualBox:/mnt/ext4$ ls -lt test.txt
+-rw-rw-r-- 1 u09 u09 380 мая 16 13:30 test.txt
+u09@u09-VirtualBox:/mnt/ext4$ touch test2.txt
+u09@u09-VirtualBox:/mnt/ext4$ ls -lt test2.txt
+-rw-rw-r-- 1 u09 u09 0 мая 16 13:39 test2.txt
+u09@u09-VirtualBox:/mnt/ext4$ cd
+u09@u09-VirtualBox:~$ cd btrfs
+bash: cd: btrfs: Нет такого файла или каталога
+u09@u09-VirtualBox:~$ cd dtrfs
+bash: cd: dtrfs: Нет такого файла или каталога
+u09@u09-VirtualBox:~$ cd btrfs
+bash: cd: btrfs: Нет такого файла или каталога
+u09@u09-VirtualBox:~$ cd d
+bash: cd: d: Нет такого файла или каталога
+u09@u09-VirtualBox:~$ cd /mnt/ext4
+u09@u09-VirtualBox:/mnt/ext4$ cd ..
+u09@u09-VirtualBox:/mnt$ cd btrfs
+u09@u09-VirtualBox:/mnt/btrfs$ touch test.txt
+u09@u09-VirtualBox:/mnt/btrfs$ ls -li test.txt
+257 -rw-rw-r-- 1 u09 u09 0 мая 16 13:43 test.txt
+u09@u09-VirtualBox:/mnt/btrfs$ cd ..
+u09@u09-VirtualBox:/mnt$ cd xfs
+u09@u09-VirtualBox:/mnt/xfs$ touch test.txt
+u09@u09-VirtualBox:/mnt/xfs$ ls -li test.txt
+131 -rw-rw-r-- 1 u09 u09 0 мая 16 13:45 test.txt
+u09@u09-VirtualBox:/mnt/xfs$ cd..
+cd..: команда не найдена
+u09@u09-VirtualBox:/mnt/xfs$ cd ..
+u09@u09-VirtualBox:/mnt$ ls -li
+итого 36
+   256 drwxr-xr-x 1 u09  u09    16 мая 16 13:43 btrfs
+800885 drwxr-xr-x 2 u09  u09  4096 мая 16 13:13 btrfs2
+800882 drwxr-xr-x 2 root root 4096 мая 16 13:12 dtrfs
+     2 drwxr-xr-x 3 u09  u09  4096 мая 16 12:11 ext2
+     2 drwxr-xr-x 3 u09  u09  4096 мая 16 13:39 ext4
+   128 drwxr-xr-x 2 u09  u09    22 мая 16 13:45 xfs
+800883 drwxr-xr-x 2 u09  u09  4096 мая 16 13:12 xfs2
+u09@u09-VirtualBox:/mnt$ df -i .
+Файл.система    Iнодов IИспользовано IСвободно IИспользовано% Cмонтировано в
+/dev/sda3      1605632        354733   1250899            23% /
+u09@u09-VirtualBox:/mnt$ cd ext4
+u09@u09-VirtualBox:/mnt/ext4$ df -i .
+Файл.система   Iнодов IИспользовано IСвободно IИспользовано% Cмонтировано в
+/dev/sdb1      131072            13    131059             1% /mnt/ext4
+u09@u09-VirtualBox:/mnt/ext4$ cd ../ext2
+u09@u09-VirtualBox:/mnt/ext2$ df -i .
+Файл.система   Iнодов IИспользовано IСвободно IИспользовано% Cмонтировано в
+/dev/sdc2      196608            11    196597             1% /mnt/ext2
+u09@u09-VirtualBox:/mnt/ext2$ ls -li /
+итого 2744400
+     13 lrwxrwxrwx   1 root root          7 фев  6 15:28 bin -> usr/bin
+ 393217 drwxr-xr-x   4 root root       4096 мая 16 12:09 boot
+1310723 drwxrwxr-x   2 root root       4096 фев  6 15:34 cdrom
+      1 drwxr-xr-x  19 root root       4440 мая 16 13:05 dev
+1441793 drwxr-xr-x 132 root root      12288 мая 16 12:13 etc
+ 524289 drwxr-xr-x   4 root root       4096 фев  7 14:59 home
+     14 lrwxrwxrwx   1 root root          7 фев  6 15:28 lib -> usr/lib
+     15 lrwxrwxrwx   1 root root          9 фев  6 15:28 lib32 -> usr/lib32
+     16 lrwxrwxrwx   1 root root          9 фев  6 15:28 lib64 -> usr/lib64
+     17 lrwxrwxrwx   1 root root         10 фев  6 15:28 libx32 -> usr/libx32
+     11 drwx------   2 root root      16384 фев  6 15:24 lost+found
+ 262145 drwxr-xr-x   2 root root       4096 авг  8  2023 media
+ 655361 drwxr-xr-x   9 root root       4096 мая 16 13:16 mnt
+1310721 drwxr-xr-x   3 root root       4096 мар 21 14:04 opt
+      1 dr-xr-xr-x 282 root root          0 мая 16 11:08 proc
+1048577 drwx------   6 root root       4096 мая 16 13:19 root
+      1 drwxr-xr-x  37 root root       1020 мая 16 11:41 run
+     18 lrwxrwxrwx   1 root root          8 фев  6 15:28 sbin -> usr/sbin
+ 655362 drwxr-xr-x  13 root root       4096 авг  8  2023 snap
+1179650 drwxr-xr-x   2 root root       4096 авг  8  2023 srv
+     12 -rw-------   1 root root 2810183680 фев  6 15:24 swapfile
+      1 dr-xr-xr-x  13 root root          0 мая 16 11:08 sys
+1441795 drwxrwxrwt  19 root root       4096 мая 16 13:25 tmp
+ 262146 drwxr-xr-x  14 root root       4096 авг  8  2023 usr
+ 524290 drwxr-xr-x  14 root root       4096 авг  8  2023 var
+u09@u09-VirtualBox:/mnt/ext2$ du
+du: невозможно прочитать каталог './lost+found': Отказано в доступе
+16	./lost+found
+20	.
+u09@u09-VirtualBox:/mnt/ext2$ sudo du
+16	./lost+found
+20	.
+u09@u09-VirtualBox:/mnt/ext2$ cd ..
+u09@u09-VirtualBox:/mnt$ cd ext4
+u09@u09-VirtualBox:/mnt/ext4$ sudo du -h
+16K	./lost+found
+24K	.
+u09@u09-VirtualBox:/mnt/ext4$ cd mnt
+bash: cd: mnt: Нет такого файла или каталога
+u09@u09-VirtualBox:/mnt/ext4$ cd ..
+u09@u09-VirtualBox:/mnt$ sudo du -h
+16K	./ext4/lost+found
+24K	./ext4
+4,0K	./btrfs2
+4,0K	./dtrfs
+0	./xfs
+16K	./ext2/lost+found
+20K	./ext2
+4,0K	./xfs2
+16K	./btrfs
+76K	.
+u09@u09-VirtualBox:/mnt$ cd /etc/
+u09@u09-VirtualBox:/etc$ sudo du -h
+12K	./alternatives
+4,0K	./pulse/default.pa.d
+4,0K	./pulse/client.conf.d
+32K	./pulse
+8,0K	./UPower
+4,0K	./rc4.d
+4,0K	./gss/mech.d
+8,0K	./gss
+4,0K	./networkd-dispatcher/routable.d
+4,0K	./networkd-dispatcher/dormant.d
+4,0K	./networkd-dispatcher/no-carrier.d
+4,0K	./networkd-dispatcher/carrier.d
+4,0K	./networkd-dispatcher/off.d
+4,0K	./networkd-dispatcher/degraded.d
+28K	./networkd-dispatcher
+4,0K	./ModemManager/fcc-unlock.d
+4,0K	./ModemManager/connection.d
+12K	./ModemManager
+8,0K	./logcheck/ignore.d.paranoid
+24K	./logcheck/ignore.d.server
+36K	./logcheck
+12K	./gtk-3.0
+8,0K	./ubuntu-advantage
+4,0K	./apparmor/init/network-interface-security
+8,0K	./apparmor/init
+16K	./apparmor
+8,0K	./modules-load.d
+12K	./groff
+12K	./environment.d
+12K	./ufw/applications.d
+60K	./ufw
+4,0K	./sensors.d
+8,0K	./sgml/docbook-xml/4.2
+8,0K	./sgml/docbook-xml/4.4
+8,0K	./sgml/docbook-xml/4.0
+8,0K	./sgml/docbook-xml/4.5
+8,0K	./sgml/docbook-xml/4.3
+8,0K	./sgml/docbook-xml/4.1.2
+52K	./sgml/docbook-xml
+68K	./sgml
+12K	./ld.so.conf.d
+20K	./network/if-up.d
+16K	./network/if-down.d
+16K	./network/if-pre-up.d
+8,0K	./network/if-post-down.d
+64K	./network
+8,0K	./sudoers.d
+8,0K	./gdm3/PrimeOff
+8,0K	./gdm3/PostLogin
+8,0K	./gdm3/PostSession
+8,0K	./gdm3/PreSession
+8,0K	./gdm3/Init
+8,0K	./gdm3/Prime
+72K	./gdm3
+4,0K	./gdb/gdbinit.d
+12K	./gdb
+36K	./sysctl.d
+8,0K	./emacs/site-start.d
+12K	./emacs
+4,0K	./NetworkManager/dispatcher.d/pre-down.d
+4,0K	./NetworkManager/dispatcher.d/no-wait.d
+4,0K	./NetworkManager/dispatcher.d/pre-up.d
+20K	./NetworkManager/dispatcher.d
+4,0K	./NetworkManager/dnsmasq-shared.d
+8,0K	./NetworkManager/conf.d
+12K	./NetworkManager/system-connections
+4,0K	./NetworkManager/dnsmasq.d
+56K	./NetworkManager
+12K	./vim
+8,0K	./newt
+4,0K	./cups/ssl
+4,0K	./cups/interfaces
+4,0K	./cups/ppd
+80K	./cups
+184K	./init.d
+640K	./ssl/certs
+8,0K	./ssl/private
+668K	./ssl
+52K	./update-motd.d
+8,0K	./gtk-2.0
+4,0K	./initramfs-tools/conf.d
+4,0K	./initramfs-tools/scripts/local-top
+4,0K	./initramfs-tools/scripts/local-bottom
+4,0K	./initramfs-tools/scripts/init-premount
+4,0K	./initramfs-tools/scripts/init-top
+4,0K	./initramfs-tools/scripts/local-premount
+4,0K	./initramfs-tools/scripts/nfs-premount
+4,0K	./initramfs-tools/scripts/nfs-top
+4,0K	./initramfs-tools/scripts/panic
+4,0K	./initramfs-tools/scripts/init-bottom
+4,0K	./initramfs-tools/scripts/nfs-bottom
+44K	./initramfs-tools/scripts
+4,0K	./initramfs-tools/hooks
+68K	./initramfs-tools
+4,0K	./apparmor.d/dhcpd.d
+4,0K	./apparmor.d/disable
+4,0K	./apparmor.d/force-complain
+8,0K	./apparmor.d/tunables/xdg-user-dirs.d
+12K	./apparmor.d/tunables/home.d
+8,0K	./apparmor.d/tunables/multiarch.d
+88K	./apparmor.d/tunables
+24K	./apparmor.d/abstractions/apparmor_api
+48K	./apparmor.d/abstractions/ubuntu-browsers.d
+532K	./apparmor.d/abstractions
+8,0K	./apparmor.d/local
+16K	./apparmor.d/abi
+760K	./apparmor.d
+4,0K	./ca-certificates/update.d
+8,0K	./ca-certificates
+4,0K	./tmpfiles.d
+8,0K	./cron.hourly
+16K	./cupshelpers
+4,0K	./binfmt.d
+36K	./cron.daily
+4,0K	./dictionaries-common
+128K	./pam.d
+16K	./bluetooth
+4,0K	./openvpn/client
+4,0K	./openvpn/server
+16K	./openvpn
+4,0K	./glvnd/egl_vendor.d
+8,0K	./glvnd
+4,0K	./rc0.d
+52K	./xml
+4,0K	./usb_modeswitch.d
+8,0K	./cracklib
+12K	./rsyslog.d
+4,0K	./update-notifier
+16K	./skel
+4,0K	./dpkg/dpkg.cfg.d
+12K	./dpkg/origins
+24K	./dpkg
+8,0K	./iproute2/rt_protos.d
+8,0K	./iproute2/rt_tables.d
+56K	./iproute2
+20K	./xdg/Xwayland-session.d
+20K	./xdg/menus
+180K	./xdg/autostart
+4,0K	./xdg/systemd
+236K	./xdg
+8,0K	./depmod.d
+4,0K	./opt
+12K	./libnl-3
+8,0K	./netplan
+8,0K	./hp
+8,0K	./libblockdev/conf.d
+12K	./libblockdev
+4,0K	./security/limits.d
+4,0K	./security/namespace.d
+60K	./security
+16K	./cron.weekly
+84K	./apt/apt.conf.d
+12K	./apt/preferences.d
+12K	./apt/trusted.gpg.d
+8,0K	./apt/sources.list.d
+4,0K	./apt/auth.conf.d
+4,0K	./apt/keyrings
+136K	./apt
+12K	./udisks2
+8,0K	./terminfo
+4,0K	./systemd/network
+8,0K	./systemd/user/default.target.wants
+4,0K	./systemd/user/sockets.target.wants
+4,0K	./systemd/user/pipewire.service.wants
+8,0K	./systemd/user/graphical-session-pre.target.wants
+8,0K	./systemd/user/gnome-session.target.wants
+40K	./systemd/user
+4,0K	./systemd/system/final.target.wants
+4,0K	./systemd/system/emergency.target.wants
+4,0K	./systemd/system/sleep.target.wants
+4,0K	./systemd/system/getty.target.wants
+4,0K	./systemd/system/sysinit.target.wants
+4,0K	./systemd/system/open-vm-tools.service.requires
+4,0K	./systemd/system/rescue.target.wants
+4,0K	./systemd/system/graphical.target.wants
+4,0K	./systemd/system/paths.target.wants
+4,0K	./systemd/system/display-manager.service.wants
+4,0K	./systemd/system/sockets.target.wants
+4,0K	./systemd/system/timers.target.wants
+16K	./systemd/system/multi-user.target.wants
+4,0K	./systemd/system/network-online.target.wants
+4,0K	./systemd/system/printer.target.wants
+4,0K	./systemd/system/bluetooth.target.wants
+16K	./systemd/system/snapd.mounts.target.wants
+4,0K	./systemd/system/oem-config.service.wants
+4,0K	./systemd/system/cloud-final.service.wants
+176K	./systemd/system
+264K	./systemd
+20K	./X11/cursors
+8,0K	./X11/Xresources
+8,0K	./X11/xsm
+204K	./X11/app-defaults
+16K	./X11/xinit
+4,0K	./X11/xkb
+64K	./X11/Xsession.d
+8,0K	./X11/fonts/Type1
+12K	./X11/fonts/misc
+24K	./X11/fonts
+4,0K	./X11/xorg.conf.d
+8,0K	./X11/Xreset.d
+412K	./X11
+4,0K	./ifplugd/action.d
+8,0K	./ifplugd
+4,0K	./rc1.d
+4,0K	./libpaper.d
+24K	./kernel/postinst.d
+4,0K	./kernel/install.d
+8,0K	./kernel/preinst.d
+12K	./kernel/postrm.d
+52K	./kernel
+8,0K	./selinux
+12K	./ppp/ip-up.d
+12K	./ppp/ip-down.d
+8,0K	./ppp/peers
+4,0K	./ppp/ip-pre-up.d
+4,0K	./ppp/ipv6-down.d
+4,0K	./ppp/ipv6-up.d
+96K	./ppp
+4,0K	./ssh/ssh_config.d
+12K	./ssh
+4,0K	./vulkan/icd.d
+4,0K	./vulkan/implicit_layer.d
+4,0K	./vulkan/explicit_layer.d
+16K	./vulkan
+8,0K	./snmp
+16K	./cron.d
+4,0K	./rcS.d
+16K	./chatscripts
+4,0K	./avahi/services
+20K	./avahi
+12K	./pm/sleep.d
+16K	./pm
+4,0K	./udev/hwdb.d
+96K	./udev/rules.d
+108K	./udev
+12K	./polkit-1/localauthority.conf.d
+4,0K	./polkit-1/localauthority/90-mandatory.d
+4,0K	./polkit-1/localauthority/10-vendor.d
+4,0K	./polkit-1/localauthority/50-local.d
+4,0K	./polkit-1/localauthority/20-org.d
+4,0K	./polkit-1/localauthority/30-site.d
+24K	./polkit-1/localauthority
+40K	./polkit-1
+24K	./fwupd/remotes.d
+48K	./fwupd
+12K	./PackageKit
+64K	./logrotate.d
+4,0K	./rc5.d
+12K	./sane.d/dll.d
+356K	./sane.d
+8,0K	./dconf/db/ibus.d
+16K	./dconf/db
+8,0K	./dconf/profile
+28K	./dconf
+8,0K	./containerd
+48K	./profile.d
+108K	./dbus-1/system.d
+4,0K	./dbus-1/session.d
+116K	./dbus-1
+4,0K	./rc3.d
+44K	./wpa_supplicant
+12K	./apport/blacklist.d
+20K	./apport
+8,0K	./init
+24K	./vmware-tools/scripts/vmware
+28K	./vmware-tools/scripts
+180K	./vmware-tools/vgauth/schemas
+184K	./vmware-tools/vgauth
+284K	./vmware-tools
+16K	./pki/fwupd
+16K	./pki/fwupd-metadata
+36K	./pki
+12K	./cron.monthly
+172K	./console-setup
+8,0K	./perl/Net
+12K	./perl
+4,0K	./dhcp/ddns-keys
+24K	./dhcp/dhclient-exit-hooks.d
+12K	./dhcp/dhclient-enter-hooks.d
+72K	./dhcp
+8,0K	./alsa/conf.d
+12K	./alsa
+8,0K	./thermald
+12K	./insserv.conf.d
+4,0K	./rc2.d
+8,0K	./pcmcia
+8,0K	./ldap
+4,0K	./docker
+4,0K	./libreoffice/registry/res
+8,0K	./libreoffice/registry
+12K	./libreoffice
+420K	./fonts/conf.avail
+36K	./fonts/conf.d
+464K	./fonts
+8,0K	./speech-dispatcher/clients
+80K	./speech-dispatcher/modules
+108K	./speech-dispatcher
+8,0K	./default/grub.d
+128K	./default
+144K	./grub.d
+28K	./gnome
+16K	./brltty/Attributes
+40K	./brltty/Keyboard
+1,5M	./brltty/Contraction
+924K	./brltty/Text
+8,0K	./brltty/Input/mn
+8,0K	./brltty/Input/vs
+16K	./brltty/Input/mm
+16K	./brltty/Input/vo
+8,0K	./brltty/Input/tt
+8,0K	./brltty/Input/bd
+68K	./brltty/Input/hw
+28K	./brltty/Input/ic
+8,0K	./brltty/Input/cn
+8,0K	./brltty/Input/bg
+36K	./brltty/Input/md
+16K	./brltty/Input/ir
+8,0K	./brltty/Input/cb
+8,0K	./brltty/Input/vr
+8,0K	./brltty/Input/mb
+60K	./brltty/Input/ts
+48K	./brltty/Input/fs
+12K	./brltty/Input/hd
+12K	./brltty/Input/ce
+8,0K	./brltty/Input/vd
+8,0K	./brltty/Input/lb
+36K	./brltty/Input/mt
+144K	./brltty/Input/bm
+12K	./brltty/Input/bl
+80K	./brltty/Input/hm
+160K	./brltty/Input/pm
+8,0K	./brltty/Input/tn
+64K	./brltty/Input/eu
+8,0K	./brltty/Input/np
+12K	./brltty/Input/ec
+8,0K	./brltty/Input/at
+108K	./brltty/Input/ht
+76K	./brltty/Input/al
+12K	./brltty/Input/bp
+8,0K	./brltty/Input/pg
+16K	./brltty/Input/sk
+16K	./brltty/Input/bn
+4,0K	./brltty/Input/xw
+8,0K	./brltty/Input/no
+8,0K	./brltty/Input/fa
+8,0K	./brltty/Input/ba
+8,0K	./brltty/Input/lt
+1,3M	./brltty/Input
+3,7M	./brltty
+8,0K	./python3.10
+36K	./acpi/events
+60K	./acpi
+16K	./bash_completion.d
+8,0K	./ipp-usb
+52K	./bind
+4,0K	./apm/resume.d
+4,0K	./apm/suspend.d
+8,0K	./apm/event.d
+8,0K	./apm/scripts.d
+28K	./apm
+8,0K	./python3
+4,0K	./rc6.d
+44K	./modprobe.d
+8,0K	./geoclue
+8,0K	./update-manager/release-upgrades.d
+20K	./update-manager
+4,0K	./ghostscript/fontmap.d
+24K	./ghostscript/cidfmap.d
+32K	./ghostscript
+8,0K	./firefox/pref
+12K	./firefox
+12M	.
+u09@u09-VirtualBox:/etc$ sudo du -hs
+12M	.
+u09@u09-VirtualBox:/etc$ sudo du -hs ./systemd
+264K	./systemd
+u09@u09-VirtualBox:/etc$ cd ..
+
+u09@u09-VirtualBox:/$ ls -l\
+> 
+итого 2744400
+lrwxrwxrwx   1 root root          7 фев  6 15:28 bin -> usr/bin
+drwxr-xr-x   4 root root       4096 мая 16 12:09 boot
+drwxrwxr-x   2 root root       4096 фев  6 15:34 cdrom
+drwxr-xr-x  19 root root       4440 мая 16 13:05 dev
+drwxr-xr-x 132 root root      12288 мая 16 12:13 etc
+drwxr-xr-x   4 root root       4096 фев  7 14:59 home
+lrwxrwxrwx   1 root root          7 фев  6 15:28 lib -> usr/lib
+lrwxrwxrwx   1 root root          9 фев  6 15:28 lib32 -> usr/lib32
+lrwxrwxrwx   1 root root          9 фев  6 15:28 lib64 -> usr/lib64
+lrwxrwxrwx   1 root root         10 фев  6 15:28 libx32 -> usr/libx32
+drwx------   2 root root      16384 фев  6 15:24 lost+found
+drwxr-xr-x   2 root root       4096 авг  8  2023 media
+drwxr-xr-x   9 root root       4096 мая 16 13:16 mnt
+drwxr-xr-x   3 root root       4096 мар 21 14:04 opt
+dr-xr-xr-x 283 root root          0 мая 16 11:08 proc
+drwx------   6 root root       4096 мая 16 13:19 root
+drwxr-xr-x  37 root root       1020 мая 16 11:41 run
+lrwxrwxrwx   1 root root          8 фев  6 15:28 sbin -> usr/sbin
+drwxr-xr-x  13 root root       4096 авг  8  2023 snap
+drwxr-xr-x   2 root root       4096 авг  8  2023 srv
+-rw-------   1 root root 2810183680 фев  6 15:24 swapfile
+dr-xr-xr-x  13 root root          0 мая 16 11:08 sys
+drwxrwxrwt  19 root root       4096 мая 16 13:25 tmp
+drwxr-xr-x  14 root root       4096 авг  8  2023 usr
+drwxr-xr-x  14 root root       4096 авг  8  2023 var
+u09@u09-VirtualBox:/$ 
+09@u09-VirtualBox:~$ sudo du -hs /usr
+[sudo] пароль для u09: 
+5,4G	/usr
+u09@u09-VirtualBox:/$ sudo du -h /usr
+/usr/lib/python3/dist-packages/requests
+16K	/usr/lib/python3/dist-packages/certifi/__pycache__
+308K	/usr/lib/python3/dist-packages/certifi
+24K	/usr/lib/python3/dist-packages/PyGObject-3.42.1.egg-info
+12K	/usr/lib/python3/dist-packages/chardet/cli/__pycache__
+24K	/usr/lib/python3/dist-packages/chardet/cli
+632K	/usr/lib/python3/dist-packages/chardet/__pycache__
+16K	/usr/lib/python3/dist-packages/chardet/metadata/__pycache__
+40K	/usr/lib/python3/dist-packages/chardet/metadata
+1,8M	/usr/lib/python3/dist-packages/chardet
+62M	/usr/lib/python3/dist-packages
+62M	/usr/lib/python3
+228K	/usr/lib/man-db
+24K	/usr/lib/modprobe.d
+352K	/usr/lib/aspell/x86_64-linux-gnu
+2,0M	/usr/lib/aspell
+3,6G	/usr/lib
+5,4G	/usr
+u09@u09-VirtualBox:/$ sudo du -h /usr | grep docker 
+164M	/usr/libexec/docker/cli-plugins
+165M	/usr/libexec/docker
+8,0K	/usr/share/doc/docker-compose-plugin
+12K	/usr/share/doc/python3-docker
+8,0K	/usr/share/doc/docker-buildx-plugin
+12K	/usr/share/doc/python3-dockerpty
+8,0K	/usr/share/doc/docker-ce-rootless-extras
+32K	/usr/share/doc/docker-compose
+12K	/usr/share/doc/docker-ce
+8,0K	/usr/share/doc/docker-ce-cli
+24K	/usr/lib/python3/dist-packages/docker-5.0.3.egg-info
+24K	/usr/lib/python3/dist-packages/docker_compose-1.29.2.egg-info
+40K	/usr/lib/python3/dist-packages/docker/transport/__pycache__
+80K	/usr/lib/python3/dist-packages/docker/transport
+28K	/usr/lib/python3/dist-packages/docker/context/__pycache__
+56K	/usr/lib/python3/dist-packages/docker/context
+60K	/usr/lib/python3/dist-packages/docker/utils/__pycache__
+124K	/usr/lib/python3/dist-packages/docker/utils
+136K	/usr/lib/python3/dist-packages/docker/models/__pycache__
+264K	/usr/lib/python3/dist-packages/docker/models
+192K	/usr/lib/python3/dist-packages/docker/api/__pycache__
+404K	/usr/lib/python3/dist-packages/docker/api
+76K	/usr/lib/python3/dist-packages/docker/types/__pycache__
+168K	/usr/lib/python3/dist-packages/docker/types
+52K	/usr/lib/python3/dist-packages/docker/__pycache__
+24K	/usr/lib/python3/dist-packages/docker/credentials/__pycache__
+48K	/usr/lib/python3/dist-packages/docker/credentials
+1,3M	/usr/lib/python3/dist-packages/docker
+36K	/usr/lib/python3/dist-packages/dockerpty/__pycache__
+72K	/usr/lib/python3/dist-packages/dockerpty
+20K	/usr/lib/python3/dist-packages/dockerpty-0.4.1.egg-info
+u09@u09-VirtualBox:/$ sudo du -h /var/lib/docker | grep docker
+92K/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/PEAR/Installer/Role
+104K	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/PEAR/Installer
+32K	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/PEAR/Frontend
+8,0K	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/PEAR/ChannelFile
+1,8M	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/PEAR
+16K	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/.channels/.alias
+36K	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/.channels
+1,1M	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/extensions/no-debug-non-zts-20230831
+1,1M	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/extensions
+20K	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/Console
+16K	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/OS
+92K	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/Archive
+24K	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/doc/XML_Util/examples
+28K	/var/lib/docker/overlay2/cc4f04caf42f4fe8b1dff90863a1ada3088e6570073935e8a3e189eee875d427/diff/usr/local/lib/php/doc/XML_Util
+u09@u09-VirtualBox:/$ sudo du -hs /var/lib/docker
+5,7G	/var/lib/docker
+u09@u09-VirtualBox:/$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+adminer      latest    780d97f27e58   7 weeks ago    121MB
+joomla       latest    29595f1bada0   2 months ago   760MB
+php          latest    cd0e124311ea   2 months ago   547MB
+tomcat       latest    88b0f1cee84c   2 months ago   519MB
+postgres     latest    76e3e031d245   2 months ago   438MB
+mariadb      latest    a914eff5d2eb   3 months ago   336MB
+alpine       latest    aded1e1a5b37   3 months ago   7.83MB
+wordpress    latest    52bb3e73152a   3 months ago   701MB
+nginx        latest    53a18edff809   3 months ago   192MB
+python       latest    e6c8fe2e1108   3 months ago   1.02GB
+phpmyadmin   latest    052506f2de4d   3 months ago   570MB
+httpd        latest    83d938198316   3 months ago   148MB
+mysql        latest    fa262c3a6564   3 months ago   797MB
+redis        latest    ad4b31aa2de6   4 months ago   117MB
+openjdk      latest    71260f256d19   2 years ago    470MB
+u09@u09-VirtualBox:/$ sudo fsck /dev/sdb1
+fsck из util-linux 2.37.2
+e2fsck 1.46.5 (30-Dec-2021)
+/dev/sdb1: восстановление журнала
+Установка числа свободных inode в 131059 (было 131061)
+Установка числа свободных блоков в 498131 (было 498132)
+/dev/sdb1: clean, 13/131072 files, 26157/524288 blocks
+u09@u09-VirtualBox:/$ sudo umount /mnt/ext4
+umount: /mnt/ext4: not mounted.
+u09@u09-VirtualBox:/$ sudo umount /mnt/etx4
+umount: /mnt/etx4: не указана точка монтирования.
+u09@u09-VirtualBox:/$ sudo umount /mnt/ext
+umount: /mnt/ext: не указана точка монтирования.
+u09@u09-VirtualBox:/$ sudo umount /mnt/ext4
+umount: /mnt/ext4: not mounted.
+u09@u09-VirtualBox:/$ sudo umount /mnt/ext4
+umount: /mnt/ext4: not mounted.
+u09@u09-VirtualBox:/$ sudo fsck /dev/sdb1
+fsck из util-linux 2.37.2
+e2fsck 1.46.5 (30-Dec-2021)
+/dev/sdb1: clean, 13/131072 files, 26157/524288 blocks
+u09@u09-VirtualBox:/$ sudo fsck /dev/sdc2
+fsck из util-linux 2.37.2
+e2fsck 1.46.5 (30-Dec-2021)
+/dev/sdc2 was not cleanly unmounted, check forced.
+Проход 1: Проверка inodes, блокs, а также размеров
+Pass 2: Checking каталог structure
+Pass 3: Checking каталог connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking группа summary information
+/dev/sdc2: 11/196608 files (0.0% non-contiguous), 13500/786171 blocks
+u09@u09-VirtualBox:/$ sudo fsck /dev/sdd1
+fsck из util-linux 2.37.2
+e2fsck 1.46.5 (30-Dec-2021)
+fsck.ext2: Нет такого файла или каталога при попытке открыть /dev/sdd1
+Возможно, несуществующее устройство?
+u09@u09-VirtualBox:/$ sudo fsck /dev/sdc1
+fsck из util-linux 2.37.2
+If you wish to check the consistency of a BTRFS filesystem or
+repair a damaged filesystem, see btrfs(8) subcommand 'check'.
+u09@u09-VirtualBox:/$ sudo debugfs /dev/sdb1
+debugfs 1.46.5 (30-Dec-2021)
+debugfs:  
+debugfs:  jounal_open
+debugfs: Unknown request "jounal_open".  Type "?" for a request list.
+debugfs:  journal_open
+journal_open: Filesystem opened read/only
+debugfs:  jc
+Journal not open.
+debugfs:  journal_close
+Journal not open.
+debugfs:   
+u09@u09-VirtualBox:/$ sudo debugfs -w /dev/sdb1
+debugfs 1.46.5 (30-Dec-2021)
+debugfs:  rm test.txt
+
+debugfs:  ls
+debugfs:  lsdel
+debugfs:  lsdel
+debugfs:  ungel <12> test123
+debugfs: Unknown request "ungel".  Type "?" for a request list.
+debugfs:  ungel 
+debugfs: Unknown request "ungel".  Type "?" for a request list.
+debugfs:  undel
+undel: Usage: undelete <inode_num> [dest_name]
+debugfs:  undel <12> test123
+debugfs:  ls
+ (12) .    2  (12) ..    11  (20) lost+found    12  (16) test123   
+ 13  (4024) test2.txt   
+debugfs:  q
+u09@u09-VirtualBo
+u09@u09-VirtualBox:/$ sudo mount /dev/sdb1 /mnt/ext4
+mount: /mnt/ext4: /dev/sdb1 уже смонтирован в /mnt/ext4.
+u09@u09-VirtualBox:/$ sudo chown u09:u09 /mnt/ext4
+u09@u09-VirtualBox:/$ cat /mnt/ext4/test123
+123456
+1234566
+jgjjhgjhiojh
+NAME   FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sdb                                                                           
+├─sdb1 ext4   1.0         83f24462-26f6-4aa8-b3e2-a7aef44c2753    1,8G     0% /mnt/ext4
+└─sdb2 xfs                d5dd2216-5470-4051-852a-9eecd87f60bd    2,9G     2% /mnt/xfs
+u09@u09-VirtualBox:/$ sudo dumpe2fs /dev/sdb1
+TABLE_ZEROED]
+  Block bitmap at 268 (bg #0 + 268), csum 0x00000000
+  Inode bitmap at 284 (bg #0 + 284), csum 0x00000000
+  Inode table at 5921-6432 (bg #0 + 5921)
+  32768 free blocks, 8192 free inodes, 0 directories, 8192 unused inodes
+  Free blocks: 360448-393215
+  Свободные inod'ы: 90113-98304
+Group 12: (Blocks 393216-425983) csum 0x8381 [INODE_UNINIT, BLOCK_UNINIT, ITABLE_ZEROED]
+  Block bitmap at 269 (bg #0 + 269), csum 0x00000000
+  Inode bitmap at 285 (bg #0 + 285), csum 0x00000000
+  Inode table at 6433-6944 (bg #0 + 6433)
+  32768 free blocks, 8192 free inodes, 0 directories, 8192 unused inodes
+  Free blocks: 393216-425983
+  Свободные inod'ы: 98305-106496
+Group 13: (Blocks 425984-458751) csum 0x0b18 [INODE_UNINIT, BLOCK_UNINIT, ITABLE_ZEROED]
+  Block bitmap at 270 (bg #0 + 270), csum 0x00000000
+  Inode bitmap at 286 (bg #0 + 286), csum 0x00000000
+  Inode table at 6945-7456 (bg #0 + 6945)
+  32768 free blocks, 8192 free inodes, 0 directories, 8192 unused inodes
+  Free blocks: 425984-458751
+  Свободные inod'ы: 106497-114688
+Group 14: (Blocks 458752-491519) csum 0xc926 [INODE_UNINIT, BLOCK_UNINIT, ITABLE_ZEROED]
+  Block bitmap at 271 (bg #0 + 271), csum 0x00000000
+  Inode bitmap at 287 (bg #0 + 287), csum 0x00000000
+  Inode table at 7457-7968 (bg #0 + 7457)
+  32768 free blocks, 8192 free inodes, 0 directories, 8192 unused inodes
+  Free blocks: 458752-491519
+  Свободные inod'ы: 114689-122880
+Group 15: (Blocks 491520-524287) csum 0x8243 [INODE_UNINIT, ITABLE_ZEROED]
+  Block bitmap at 272 (bg #0 + 272), csum 0x3a2df6d3
+  Inode bitmap at 288 (bg #0 + 288), csum 0x00000000
+  Inode table at 7969-8480 (bg #0 + 7969)
+  32768 free blocks, 8192 free inodes, 0 directories, 8192 unused inodes
+  Free blocks: 491520-524287
+  Свободные inod'ы: 122881-131072
+u09@u09-VirtualBox:/$ sudo dumpe2fs /dev/sdb1 | less
+Filesystem volume name:   <none>
+Last mounted on:          /mnt/ext4
+Filesystem UUID:          83f24462-26f6-4aa8-b3e2-a7aef44c2753
+Filesystem magic number:  0xEF53
+Filesystem revision #:    1 (dynamic)
+Filesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery extent 64bit flex_bg sparse_super large_file huge_file dir_nlink extra_isize metadata_csum
+Filesystem flags:         signed_directory_hash 
+Default mount options:    user_xattr acl
+Filesystem state:         clean
+Errors behavior:          Continue
+Filesystem OS type:       Linux
+Inode count:              131072
+Block count:              524288
+Reserved block count:     26214
+Overhead clusters:        26150
+Free blocks:              498131
+Free inodes:              131059
+First block:              0
+Block size:               4096
+Fragment size:            4096
+u09@u09-VirtualBox:/$ sudo dumpe2fs /dev/sdb2 | less
+u09@u09-VirtualBox:/$ sudo tune2fs -O has_journal /dev/sdc2
+tune2fs 1.46.5 (30-Dec-2021)
+Создание inod'а журнала: готово
+u09@u09-VirtualBox:/$ sudo dumpe2fs /dev/sdc2 | less
+u09@u09-VirtualBox:/$ sudo tune2fs -O has_journal /dev/sdc2
+tune2fs 1.46.5 (30-Dec-2021)
+u09@u09-VirtualBox:/$ mount | grep xfs
+u09@u09-VirtualBox:/$ sudo umount /mnt/xfs
+umount: /mnt/xfs: not mounted.
+u09@u09-VirtualBox:/$ mount | grep xfs
+u09@u09-VirtualBox:/$ xfs_repair -v
+Usage: xfs_repair [options] device
+
+Options:
+  -f           The device is a file
+  -L           Force log zeroing. Do this as a last resort.
+  -l logdev    Specifies the device where the external log resides.
+  -m maxmem    Maximum amount of memory to be used in megabytes.
+  -n           No modify mode, just checks the filesystem for damage.
+               (Cannot be used together with -e.)
+  -P           Disables prefetching.
+  -r rtdev     Specifies the device where the realtime section resides.
+  -v           Verbose output.
+  -c subopts   Change filesystem parameters - use xfs_admin.
+  -o subopts   Override default behaviour, refer to man page.
+  -t interval  Reporting interval in seconds.
+  -d           Repair dangerously.
+  -e           Exit with a non-zero code if any errors were repaired.
+               (Cannot be used together with -n.)
+  -V           Reports version and exits.
+u09@u09-VirtualBox:/$ xfs_repair -V
+xfs_repair version 5.13.0
+u09@u09-VirtualBox:/$ sudo badblocks -vn /dev/sdb2 -o ~/bb
+Checking for bad blocks in non-destructive read-write mode
+From block 0 to 3144686
+Testing with random pattern: 
+q   
+^C  
+
+Interrupted at block 281984
+
+Interrupt caught, cleaning up
+u09@u09-VirtualBox:/$ sudo badblocks -vn /dev/sdb2 -o ~/bb
+Checking for bad blocks in non-destructive read-write mode
+From block 0 to 3144686
+Testing with random pattern: u09
+^C
+
+Interrupted at block 77440
+
+Interrupt caught, cleaning up
+u09@u09-VirtualBox:/$ sudo xfs_info
+Usage: xfs_info [-V] [-t mtab] [mountpoint|device|file]
+u09@u09-VirtualBox:/$ sudo xfs_info /dev/sdb2
+meta-data=/dev/sdb2              isize=512    agcount=4, agsize=196543 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=0 inobtcount=0
+data     =                       bsize=4096   blocks=786171, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+u09@u09-VirtualBox:~$ sudo xfs_db /dev/sdb2
+xfs_db> 
+xfs_db> ju
+command ju not found
+xfs_db> ls
+Это не каталог
+xfs_db> version
+versionnum [0xb4a5+0x18a] = V5,NLINK,DIRV2,ALIGN,LOGV2,EXTFLG,MOREBITS,ATTR2,LAZYSBCOUNT,PROJID32BIT,CRC,FTYPE,FINOBT,SPARSE_INODES,REFLINK
+xfs_db> q
+u09@u09-VirtualBox:~$ sudo apt install xfsdump
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Вы можете запустить «apt --fix-broken install» для исправления этих ошибок.
+Следующие пакеты имеют неудовлетворённые зависимости:
+ linux-generic-hwe-22.04 : Зависит: linux-headers-generic-hwe-22.04 (= 6.8.0-59.61~22.04.1) но 6.8.0-58.60~22.04.1 должен быть установлен
+                           Рекомендует: linux-tools-6.8.0-59-generic но он не будет установлен
+                           Рекомендует: ubuntu-kernel-accessories но он не может быть установлен
+E: Неудовлетворённые зависимости. Попытайтесь выполнить «apt --fix-broken install», не указывая имени пакета (или указав решение).
+u09@u09-VirtualBox:~$ sudo apt install xfsdump
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Следующие пакеты устанавливались автоматически и больше не требуются:
+  libwpe-1.0-1 libwpebackend-fdo-1.0-1 linux-headers-6.8.0-57-generic
+  linux-hwe-6.8-headers-6.8.0-57 linux-hwe-6.8-tools-6.8.0-57
+  linux-image-6.8.0-57-generic linux-modules-6.8.0-57-generic
+  linux-modules-extra-6.8.0-57-generic linux-tools-6.8.0-57-generic
+Для их удаления используйте «sudo apt autoremove».
+Предлагаемые пакеты:
+  attr quota
+Следующие НОВЫЕ пакеты будут установлены:
+  xfsdump
+Обновлено 0 пакетов, установлено 1 новых пакетов, для удаления отмечено 0 пакетов, и 47 пакетов не обновлено.
+Необходимо скачать 233 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 799 kB.
+Пол:1 http://ru.archive.ubuntu.com/ubuntu jammy/main amd64 xfsdump amd64 3.1.9+0+nmu2 [233 kB]
+Получено 233 kB за 0с (476 kB/s)  
+Выбор ранее не выбранного пакета xfsdump.
+(Чтение базы данных … на данный момент установлено 224122 файла и каталога.)
+Подготовка к распаковке …/xfsdump_3.1.9+0+nmu2_amd64.deb …
+Распаковывается xfsdump (3.1.9+0+nmu2) …
+Настраивается пакет xfsdump (3.1.9+0+nmu2) …
+Обрабатываются триггеры для man-db (2.10.2-1) …
+u09@u09-VirtualBox:~$ sudo xfs_metadump /dev/sdb2 ~/xfsmd
+xfs_metadump: Warning: log recovery of an obfuscated metadata image can leak unobfuscated metadata and/or cause image corruption.  If possible, please mount the filesystem to clean the log, or disable obfuscation.
+u09@u09-VirtualBox:~$ stat xfsmd
+  Файл: xfsmd
+  Размер: 10777088  	Блоков: 21056      Блок В/В: 4096   обычный файл
+Устройство: 803h/2051d	Инода: 979265      Ссылки: 1
+Доступ: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+Доступ:        2025-05-22 13:21:52.613254796 +0700
+Модифицирован: 2025-05-22 13:21:52.151487534 +0700
+Изменён:       2025-05-22 13:21:52.151487534 +0700
+Создан:        2025-05-22 13:21:52.005244540 +0700
+u09@u09-VirtualBox:~$ xfsrestore
+xfsrestore: version 3.1.9 (dump format 3.0)
+xfsrestore: usage: xfsrestore [ -a <alt. workspace dir> ... ]
+                              [ -b <blocksize> ]
+                              [ -c <media change alert program>  ]
+                              [ -e (don't overwrite existing files) ]
+                              [ -f <source> ... ]
+                              [ -h (help) ]
+                              [ -i (interactive) ]
+                              [ -m (force usage of minimal rmt) ]
+                              [ -n <file> (restore only if newer than) ]
+                              [ -o (restore owner/group even if not root) ]
+                              [ -p <seconds between progress reports> ]
+                              [ -q <use QIC tape settings> ]
+                              [ -r (cumulative restore) ]
+                              [ -s <subtree> ... ]
+                              [ -t (contents only) ]
+                              [ -v <verbosity {silent, verbose, trace}> ]
+                              [ -w (use small tree window) ]
+                              [ -A (don't restore extended file attributes) ]
+                              [ -B (restore root dir owner/permissions) ]
+                              [ -D (restore DMAPI event settings) ]
+                              [ -E (don't overwrite if changed) ]
+                              [ -F (don't prompt) ]
+                              [ -I (display dump inventory) ]
+                              [ -J (inhibit inventory update) ]
+                              [ -K (force use of format 2 generation numbers) ]
+                              [ -L <session label> ]
+                              [ -O <options file> ]
+                              [ -Q (force interrupted session completion) ]
+                              [ -R (resume) ]
+                              [ -S <session id> ]
+                              [ -T (don't timeout dialogs) ]
+                              [ -X <excluded subtree> ... ]
+                              [ -Y <I/O buffer ring length> ]
+                              [ - (stdin) ]
+                              [ <destination> ]
+xfsrestore: Restore Status: ERROR
+u09@u09-VirtualBox:~$ mount | grep btrfs
+u09@u09-VirtualBox:~$ mount | grep sd
+/dev/sda3 on / type ext4 (rw,relatime,errors=remount-ro)
+cgroup2 on /sys/fs/cgroup type cgroup2 (rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot)
+/dev/sda3 on /var/snap/firefox/common/host-hunspell type ext4 (ro,noexec,noatime,errors=remount-ro)
+/dev/sda2 on /boot/efi type vfat (rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro)
+gvfsd-fuse on /run/user/1000/gvfs type fuse.gvfsd-fuse (rw,nosuid,nodev,relatime,user_id=1000,group_id=1000)
+u09@u09-VirtualBox:~$ sudo apt install btrfs-progs
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Уже установлен пакет btrfs-progs самой новой версии (5.16.2-1).
+Следующие пакеты устанавливались автоматически и больше не требуются:
+  libwpe-1.0-1 libwpebackend-fdo-1.0-1 linux-headers-6.8.0-57-generic
+  linux-hwe-6.8-headers-6.8.0-57 linux-hwe-6.8-tools-6.8.0-57
+  linux-image-6.8.0-57-generic linux-modules-6.8.0-57-generic
+  linux-modules-extra-6.8.0-57-generic linux-tools-6.8.0-57-generic
+Для их удаления используйте «sudo apt autoremove».
+Обновлено 0 пакетов, установлено 0 новых пакетов, для удаления отмечено 0 пакетов, и 47 пакетов не обновлено.
+
