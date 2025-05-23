@@ -1,0 +1,367 @@
+  //Отчет по работе с райдами
+stepan@stepan:~$ sudo apt update
+stepan@stepan:~$ sudo apt install mdadm
+stepan@stepan:~$ sudo gdisk /dev/sde
+Creating new GPT entries in memory
+GPT fdisk (gdisk) version 1.0.8
+Partition table scan:
+MBR: not present
+BSD: not present
+reating new GPT entries in memory.
+command (? for help): 0
+This option deletes all partitions and creates a new protective MBR.
+roceed? (Y/N): Y
+ommand (? for help): n
+artition number (1-128, default 1):
+irst sector (34-10485726, default 2048) or {+}size{KMGTP}:
+ast sector (2048-10485726, default 10485726) or {+}size{KMGTP}:
+urrent type is 8300 (Linux filesystem)
+ex code or GUID (L to show codes, Enter 8300): 1
+Type search string, or <Enter> to show all codes: raid
+503 Container Linux root on RAID
+a505 FreeBSD Vinum/RAID
+906 NetBSD RAID
+af01 Apple RAID
+f02 Apple RAID offline
+af06 Apple SoftRAID Status
+f07 Apple SoftRAID Scratch
+af08 Apple SoftRAID Volume
+f09 Apple SoftRAID Cache
+fd00 Linux RAID
+ex code or GUID (L to show codes, Enter = 8300): fd00
+Command (? for help): W
+
+//Создание новых записей gpt
+
+stepan@stepan:~$ sudo gdisk /dev/sdf
+GPT fdisk (gdisk) version 1.0.8
+Partition table scan:
+MBR: not present
+BSD: not present
+APM: not present
+GPT: not present
+Creating new GPT entries in memory.
+Command (? for help): 0
+This option deletes all partitions and creates a new protective M
+Proceed? (Y/N): y
+Command (? for help): o
+This option deletes all partitions and creates a new protective M
+Proceed? (Y/N): y
+Command (? for help): n
+Partition number (1-128, default 1):
+First sector (34-10485726, default = 2048) or {+-}size{KMGTP}:
+Last sector (2048-10485726, default 10485726) or {+}size{KMGTP
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter 8300): fd00
+Changed type of partition to 'Linux RAID'
+Command (? for help): W
+stepan@stepan:~$ sudo 1sblk -f
+NAME
+FSTYPE
+FSVER
+LABEL UUID
+100p0
+squashf
+4.0
+100p1 squashf 4.0
+100p2 squashf 4.0
+100p3 squashf 4.0
+100p4 squashf 4.0
+100p5
+squashf 4.0
+sda
+sda1
+sda2 ext4
+1.0
+sda3 LVM2_me LVM2 00
+ubuntu--vg-ubuntu--1v
+ext4
+1.0
+sdb
+sdc
+FSAVAIL
+6b63ade2-3d14-41fd-acae-e8bfc241205f
+1,7G
+04Bn7y-xZzB-Ma07-Bthb-jkmK-Brvs-C70B29
+d422c5c6-9c32-47af-971a-aa16fc65d52b
+5G
+создаем 
+stepan@stepan:~$ sudo mdadm-create-verbose /dev/md0 --level=1 --raid-de
+sdf1
+mdadm: Note: this array has metadata at the start and may not be suitable as a boot device. If you plan to store/boot on this device please ensure that your boot-loader understands md/v1.x metadata, or use --metadata=0.90
+mdadm: size set to 5236672K
+Continue creating array? y
+mdadm: Defaulting to version 1.2 metadata
+mdadm: array/dev/md0 started.
+stepan@stepan: $ cat /proc/mdstat
+Personalities: [linear] [multipath] [raid0] [raid1] [raid6] [raid5] [raid4] [
+mdo: active raid1 sdf1 [1] sde1 [0] 5236672 blocks super 1.2 [2/2] [UU]
+unused devices: <none>
+stepan@stepan:~$ sudo mdadm-detail-scan--verbose
+[sudo] password for stepan:
+ARRAY/dev/md0 level=raidi num-devices=2 metadata=1.2 name=server:0 UUID=
+79a894a4
+devices=/dev/sde1,/dev/sdf1
+stepan@stepan:~$ sudo -s
+ 
+   //заходим root
+root@stepan:/home/frukt0987# cat /etc/mdadm/mdadm/conf
+root@stepan:/home/frukt0987# echo "Devise partitions" >> /etc/mdadm/mdadr
+root@stepan:/home/frukt0987# echo "Device partitions" >>/etc/mdadm/mdadm_
+root@stepan:/home/frukt0987# mdadm --detail-scan-verbose /
+mdadm: does not appear to be an md device
+смотрим состояние созданого рейда 
+root@stepan:/home/frukt0987# mdadm-detail-scan-verbose
+> | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
+root@stepan:/home/frukt0987# vim /etc/mdadm/mdadm.conf заходим в vim
+# automatically tag new arrays as belonging to the local system
+HOMEHOST <system>
+#instruct the monitoring daemon where to send mail alerts
+MAILADDR root
+#definitions of existing MD arrays
+#This configuration was auto-generated on Fri, 16 Feb 2024 18:45:30 +0000 by
+Device partitions
+ARRAY /dev/md0 level-raid1 num-devices=2 metadata=1.2 name=server:0 UUID=fa67b
+79a894a4
+root@stepan:/home/frukt0987# fdisk -1 |grep mdo
+Disk /dev/mdo: 4,99 GiB, 5362352128 bytes, 10473344 sectors
+root@stepan:/home/frukt0987#
+GPT: not present
+Creating new GPT entries in memory.
+Command (? for help): 0
+This option deletes all partitions and creates a new protective MBR.
+Proceed? (Y/N): y
+Command (? for help): n
+Partition number (1-128, default 1):
+First sector (34-10473310, default = 2048) or {+-}size{KMGTP}:
+Last sector (2048-10473310, default = 10473310) or {+-}size{KMGTP}:
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter 8300):
+Changed type of partition to 'Linux filesystem'
+Command (? for help): w
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE PARTITIONS!!
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/md0.
+The operation has completed successfully.
+root@stepan:/home/frukt0987# mkfs.ext4 /dev/md0p1
+mke2fs 1.46.5 (30-Dec-2021)
+Creating filesystem with 1308907 4k blocks and 327680 inodes
+Filesystem UUID: Oea0ecf0-00cd-4c91-bc64-b819c7d2d32f
+Superblock backups stored on blocks:
+root@stepan:/home/frukt0987# mkdir /Public
+root@stepan:/home/frukt0987# mount /dev/md0p1/Public/
+root@stepan:/home/frukt0987# ls /Public/
+Lest+100
+root@stepan:/home/frukt0987# chown frukt frukt /Public
+chown: invalid user: 'frukt frukt'
+root@server:/home/frukt0987# chown frukt0987:frukt0987 /Public
+root@server:/home/frukt0987# chmod 775/Public
+root@server:/home/frukt0987# cat /Public/123
+6214587189
+stepan
+root@stepan:/home/frukt0987# uptime > /Public/upttime.txt
+root@stepan:/home/frukt0987# date > /Public/date.txt
+root@stepan:/home/frukt0987# stat/Public/uptime.txt
+root@stepan:/home/frukt0987# cat /Public/date.txt
+Чт 22 мая 2025 06:47:26 UTC
+root@stepan:/home/frukt0987# cat /Public/uptime.txt
+root@stepan:/home/frukt0987# who > /Public/who.txt
+root@stepan:/home/frukt0987# ls -1/Public/
+total 32
+-rw-rw-r-- 1 frukt0987 frukt0987
+-rw-r--r-- 1
+root
+drwx- 2 root
+-rw-r--r-- 1 root
+-rw-r--r-- 1 root
+root@stepan:/home/frukt0987#
+root
+root
+root
+root
+23 мая 22 06:44 123
+33 мая 22 06:47 date.txt
+16384 мая 22 06:34
+lost-found
+62 мая 22 06:45 upttime.txt
+80 мая 22 06:53
+who.txt
+root@stepan:/home/frukt0987# sudo blkid /dev/md0p1
+/dev/md0p1: UUID="0eaecf0-00cd-4c91-bc64-b819c7d2d32f" BLOCK_SIZE="4096" TYPE
+ux filesystem" PARTUUID="431b087d-8780-4284-9c3c-0c2d27711606"
+root@stepan:/home/frukt0987# cat /proc/mdstat
+Personalities: [linear] [multipath] [raido] [raid1] [raid6] [raid5] [raid4]
+mdo: active raid1 sdf1 [1] sde1 [0]
+5236672 blocks super 1.2 [2/2] [UU]
+unused devices: <none>
+root@stepan:/home/stepan#
+stepan@stepan:~$ sudo fdisk -1 |grep md
+[sudo] password for stepan:
+Disk /dev/md012: 4,99 GiB, 5362352128 bytes, 10473344 sectors
+/dev/md0p1 2048 10473310 10471263
+5G Linux filesystem
+stepan@stepan:~$ sudo update-initramfs
+You must specify at least one of -c, u, or -d.
+Usage: update-initramfs {-cl-dl-u} [-k version] [-v] [-b directory]
+Options:
+k version
+-C
+Specify kernel version or 'all'
+Create a new initramfs
+-u
+Update an existing initramfs
+-d
+Remove an existing initramfs
+-b directory
+Set alternate boot directory
+-V
+Be verbose
+See update-initramfs (8) for further details.
+stepan@stepan:~$ sudo update-initramfs -u
+vim /etc/fstab
+# /etc/fstab: static file system information.
+#Use 'blkid' to print the universally unique identifier for a
+#device; this may be used with UUID= as a more robust way to name devices
+#that works even if disks are added and removed. See fstab(5).
+# <file system> <mount point>
+<type>
+<options>
+<dump> <pass>
+#/ was on/dev/ubuntu-vg/ubuntu-lv during curtin installation
+/dev/disk/by-id/dm-uuid-LVM-XB53YcKvWNOUTF 1gTeL6CGPUVfh76u7Q1gzzvUiGrz2pieF7vk
+defaults 01
+#/boot was on /dev/sdd2 during curtin installation
+/dev/disk/by-uuid/6b63ade2-3d14-41fd-acae-e8bfc241205f /boot ext4 defaults 01
+/swap.img
+none
+swap
+SW
+0
+2
+# xfs part
+/dev/disk/by-uuid/652147187432f8-0218-4f7c -8f08-374fg8iwry73fhrr
+#brgs part
+/dev/disk/by-uuid/f372587342-3852678-36527-8cb9 -0frthweskgw8kfy   0   2
+/dev/disk  0  2
+" /etc/fstab" 1L , 1029B записано
+root@stepan:/home/stepan# mount -a
+root@stepan:/home/stepan#  exit
+stepan@stepan:~$ stat /Public/
+File: /Public/
+Size: 4096Device: fd00h/64768dBlocks: 8
+Inode: 5242950/Access:
+(0755/drwxr-xr-x) Uid: (
+Access: 2025-05-22 06:35:51.401937511 +0000
+Modify: 2025-05-22 06:35:51.401937511 +0000
+Change: 2025-05-22 06:35:51.401937511 +0000
+Birth: 2025-05-22 06:35:51.401937511 +0000
+stepan@stepan:~$ ls -1/Public/
+total 0
+stepan@stepan:~$ cd /var/
+stepan@stepan:/var$ ls -1
+total 44
+drwxr-xr-x 2 root roodrwxr-xr-x 14 root root
+drwxrwxrwt 2 root root
+drwxr-xr-x 42 root rootdrwxrwsr-x 2 root staff
+Irwxrwxrwx 1 root rootdrwxrwxr-x 9 root syslog
+drwxrwsr-x 2root mail
+4096мая 22
+06:4410 Block:
+4096direct
+Links: 2root)
+ckupsache
+4096 мая 2206:08
+4096 фев 16
+2024crash
+4096 мая 2206:08
+4096 апр 18
+2022Gid: ( 0/
+9 фев 16 2024
+lock/run/lock
+4096 мая 22
+06:59Log
+4096 фев 162024
+tr-xr-x 2 root root
+4096 фев 16 2024
+p
+Irwxrwxrwx 1 root root
+4 фев 16 2024
+run->run
+drwxr-xr-x 5 root root
+4096
+фев 16 2024p
+drwxr-xr-x 4 root root
+4096
+фев 162024
+drwxrwxrwt 6 root root
+4096 мая 22
+07:04
+mp
+frukt0987@server:/var$ cd
+opt
+frukt0987@server:/var$ ls -1
+total 44
+drwxr-xr-x
+2 root root
+drwxr-xr-x
+14 root root
+drwxrwx22 06:08
+IDdrwxrwsr-x
+2 root staff
+4096 апр182022
+Local
+Irwxrwxrwx
+1 root root
+9 фев 16
+4 фев 162024
+run ->undrwxr-xr-x
+5 root root
+4096 фев16
+2024drwxr-xr-x
+4 root root
+4096фев 162024
+oldrwxrwxrwt
+6 root root
+4096 мая
+2207:04mp
+stepan@stepan:/var$ cd opt/
+stepan@stepan:/var/opt$ ls -1
+total 0
+stepan@stepan:/var/opt$ cd ..
+stepan@stepan:/var$
+root@stepan:/var# cd lib
+root@stepan:/var/lib# cd docker
+root@stepan:/var/lib/docker# cd docker /
+bash: cd: too many arguments
+root@stepan:/var/lib/docker# ls -1
+total 44
+drwx----x 3 root root 4096 мая 22 02:45
+ULLOKIT
+drwx--x 2 root root 4096 мая 22 02:45
+ontainers
+-- 1
+root root 36 мая 2202:45
+engine-id
+drwx- 3 root root 4096 мая 22 02:45
+etwork
+drwxr-x--- 3 root root 4096 мая 22 02:45
+drwx--x--- 3 root root 4096 мая 22 06:59
+ins
+drwx- 3 root root 4096 мая 22 02:45
+Ines
+drwx-2 root root 4096 мая 22 06:59
+drwx- 2 root root 4096 мая 22 02:45
+warm
+drwx-2 root root 4096 мая 22 06:59
+o lunes
+drwx--x 2 root root 4096 мая 22 06:59
+root@server:/var/lib/docker# ls -1
+total 44
+drwx--x--x 3 root root 409
+мая 22 02:45
+drwx--x 2 root root 4096 мая 22 02:45
+1 root root
+ontainers
+36 мая 22 02:45
+engine-id
+drwx- 3 root root 4096 мая 22 02:45
