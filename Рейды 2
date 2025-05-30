@@ -1,0 +1,277 @@
+  //рейды 2
+stepan@stepan:"$ sudo cat /proc/mdstat
+Password stepan
+[raid1] [linear] [multipath] [raido] [raid6] [raid5] [raid4] d10
+mdo: active raid1 sdf1 [1] sde1 [0]
+5236672 blocks super 1.2 [2/2] [UU]
+unused devices: <none>
+
+stepan@stepan:~$ sudo shutdown now
+stepan@stepan:~# vim /etc/fstab
+brgs part
+/dev/disk/by-uuid/f0b64892-4896-4742-8cb9-0dcc529d6e25 /mnt/btrfs btrfs defaults 02
+#raid mdo
+#/dev/disk/by-uuid/00f723d9-5de6-4815-9318-27482c830017 /Public auto defaults 0
+
+root@stepan:"# mdadm --stop/dev/md0
+mdadm: stopped /dev/mdo
+root@:stepan~# cat /proc/mdstat
+Personalities: [linear] [multipath] [raido] [raid1] [raid6] [raid5] [raid4] [rai
+unused devices: <none>
+root@stepan~# mdadm --assemble --scan
+mdadm: /dev/mdo has been started with 1 drive (out of 2).
+root@stepan:~# cat /proc/mdstat
+Personalities: [linear] [multipath] [raido] [raid1] [raid6] [raid5] [raid4] [raid
+mdo: active raid1 sde1 [1]
+5236672 blocks super 1.2 [2/1] [_C]
+root@:stepan~# lsblk -f_
+root@stepan:~# cd /mnt/
+root@stepan:/mnt# ls -1
+total 20
+drwxr-xr-x 1 student student 0 мая 15 06:47 btrfs
+drwxr-xr-x 3 student student 4096 мая 15 07:06 ext4
+drwxr-xr-x 2 student student
+root@frukt/mnt#
+root@stepan:/# cd Public/
+root@stepan:/Public# ls -1
+total 0
+root@:stepan/Public# vim /etc/fstab
+#raid mdo
+/dev/disk/by-uuid/00f723d9-5de6-4815-9318-27482c830017/Public auto defaults
+
+root@student:/# cd /Public/
+root@stepan:/Public# stat
+File:
+Size: 4096
+Device: 10300h/66304d
+Blocks: 8
+Inode: 2
+ID Block: 4096
+directory
+Links: 4
+Access: (0775/drwxrwxr-x)
+Uid: (1000/ student)
+Access: 2025-05-22 05:07:30.619492822 +0000
+Modify: 2025-05-22 05:07:13.594418858 +0000
+Change: 2025-05-22 05:07:13.594418858 +0000
+
+root@stepan:/Public# cat > 123.txt
+werqqwerwerqewrwrewq
+asretgdfaf
+23aweqsdfrqwasfda_
+total 40 86%
+1 stepan stepan
+1 root root 28 мая 29 02:44 123.txt
+1 student
+root@:stepan/Public# shutdown -r now
+root@frukt:/Public# reboot
+root@:stepan/Public# shutdown now
+
+Student@student:~$ ls /Public/
+123 123.txt date.txt etc lost found uptime.txt who.txt
+stepan@:stepanf~$ sudo gdisk /dev/sdf_
+[sudo] password for frukt :
+GPT fdisk (gdisk) version 1.0.8
+Partition table scan:
+MBR: not present 
+BSD: not present
+APM: not present
+GPT: not present
+Creating new GPT entries in memory.
+Command (? for help): 0
+This option deletes all partitions and creates a new protective
+This option deletes all partitions and creates a new protective MBR.
+Proceed? (Y/N): y
+Command (? for help): n
+Partition number (1-128, default 1):
+First sector (34-10485726, default 2048) or {+-3size{KMGTP:
+Last sector (2048-10485726, default = 10485726) or {+}size{KMGTP}:
+Hex code or GUID (L to show codes, Enter 8300): fd00
+Changed type of partition to 'Linux RAID'
+Command (? for help): w
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING PARTITIONS!!
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdf.
+The operation has completed successfully.
+
+student@student:~$ sudo -s
+root@ stepan:/home/student# ls -1
+total 24
+drwxrwxr-x 2 frukt  frukt  4096 мая 2 04:57
+drive thi
+drwxrwxr-x 2 frukt frukt 4096 мая 2 04:58
+drwxrwxr-x 2 frukt frukt 4096 мая 2 04:58
+root 657 мая 15 06:51
+fstab_r
+
+root@stepan:/home# cd /
+root@stepan/ ls
+root@stepan:/# cd usr
+root@:stepan/usr# du
+27540
+./share/doc
+238356./share
+32180
+./sbin4
+./local/etc4
+./local/include4
+./local/bin48
+./local/lib/python3.10/dist-packages
+./local/lib/python3.10 12
+./local/lib4
+./local/src4
+./local/share/man4
+./local/share/ca-certificates12
+./local/share12
+./local/sbin4
+./local/games60
+./local4
+./libx323624116
+
+root@stepan:/usr# cd
+root@/stepan:# cd var
+root@stepan:/var/lib# cd docker
+rootfrukt/var/lib/docker# ls -1
+total 44 
+drwx--x--x 3
+root root 4096 anp13 15:37
+drwx--x--- 2 root
+root 4096 апр15 15:47
+1 root root 36 апр 13 15:37
+engine-id
+drwx- 3 root
+root 4096 апр 13 15:37
+drwxr-x--- 3
+root root 4096 апр 13 15:37
+drwx--x-- 10
+root root 4096 мая 29 02:51
+drwx- 3 root root 4096 апр 1315:37
+drwx----- 2
+root root 4096 мая 29 02:51
+
+root@stepan:/var/lib/docker# du image/
+root@:stepan/var/lib/docker# du-hs image/
+616K image/
+
+root@stepan:/var/lib/docker#
+root@stepan:/var/lib/docker# docker pull mysql
+Using default tag: lates
+68c594672ed3: Pull complete
+cfd201189145: Pull complete
+e9f009c5b388: Pull complete
+61a291920391: Pull complete
+c8604ede059a: Pull complete
+Digest: sha256:2247f6d47a59e5fa30a27ddc2e183a3e6b05bc045e3d12f8d42953
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest
+
+root@stepan:/var/lib/docker# du-hs image/
+2,6M image/
+root@stepan:/var/lib/docker# cd
+root@stepan:/var/lib# du-hs docker/_
+2 root root 4096 апр 13 08:09
+Ubuntu-release-upgrader
+drwxr-xr-x 3 root root 4096 мая 2 04:09 Ucf
+drwx-2 root root 4096 апр 13 08:08
+disks2
+drwxr-xr-x 2 root root 4096 янв 14 2022
+unattended-upgrades
+drwxr-xr-x 2 root root 4096 апр 13 08:09
+undate-manager
+drwxr-xr-x 4root root 4096 мая 22 03:55
+update-notifler
+drwxr-xr-x 2 root root 4096 мар 9 2022
+upоwеr
+drwxr-xr-x 2 root root 4096 мар 25 2022
+sb_modeswitch
+drwxr-xr-x 2 root root 4096 сен 11 2024
+usbutils
+A
+drwxr-xr-x 3 root root 4096 сен 11 2024 im
+
+root@:/stepanvar/lib# cp -r/docker/Public/_
+cp: cannot stat '/docker': No such file or directory
+root@/stepanvar/lib# cp -r docker/Public/
+root@stepan:/var/lib# cd /P
+bash: cd: /P: No such file or directory
+
+root@stepan:/var/lib# cd /Public/
+root@stepan:/Public# du-h.
+16К
+./etc/rsyslog.d
+./etc/needrestart/hook.d
+20K
+./etc/needrestart/notify.d
+20K
+./etc/needrestart/restart.d
+8,0K
+./etc/needrestart/conf.d
+84K
+./etc/needrestart
+8,0K
+./etc/ldap
+12K
+./etc/apport/blacklist.d
+20K
+./etc/apport
+8,0K
+./etc/cron.hourly
+8,0K
+./etc/ufw/applications.d
+20K
+./etc/ufw
+4,0K
+./etc/lvm/backup
+36K
+./etc/lvm/profile
+4,0K
+./etc/lvm/archive
+156K
+./etc/lvm
+8,0K
+./etc/terminfo
+8,0K
+12K
+./etc/apm/event.d
+./etc/apm
+7,6M
+./etc
+1,1G
+
+root@:/stepanPublic# du-hs..
+1,1G
+
+root@:stepan/Public# mdadm/dev/md0 --add/dev/sdf_
+root@stepan:/Public# mdadm/dev/md0
+-add/dev/sdf1_
+root@/stepanPublic# cat /proc/mdstat
+Personalities: [raid1] [linear] [multipath] [raid0] [raid6] [raid5]
+mdo: active raid1 sdf1 [2] sde1 [1]
+5236672 blocks super 1.2 [2/1] [U]
+[====>
+unused devices: <none>
+mdadm: added /dev/sdf1
+root@stepan/Public# cat /proc/mdstat
+Personalities: [raid1] [linear] [multipath]
+.) recovery 22.4% (1176832/5236672
+cat /proc/mdstat
+student: Thu May 29 03:07:19 2025
+Personalities: [raid1] [linear] (multipath) [raido] [raid6] [raid5] [raid4] [raid10]
+ubuntudesk.mdo: active raid1 sdf1 [2] sde1 [1]
+5236672 blocks super 1.2 [2/2] [UU]
+root@:stepanPublic# exit
+exit
+stepan@stepan:~$ cd /Public/student@student:/Public$ ls -1
+total 44
+stepan@:stepan/Public$ cat who.txt
+stepan tty1
+2025-05-22 04:05
+
+stepan@stepan:/Public$ sudo mdadm --detail-scan --verbose
+[sudo] password for student:
+ARRAY/dev/md0 level=raidi num-devices=2 metadata=1.2 name=student:0 UUID=73c63248:
+:56cdab8d
+devices=/dev/sde1,/dev/sdf1
+1 stepan stepan
+1 root root
+1 stepan stepan
